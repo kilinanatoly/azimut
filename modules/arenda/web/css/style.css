@@ -1,0 +1,292 @@
+
+ .cities_select {
+     margin-right: 30px;
+     width: 500px;
+     border: 1px solid #c9c9c9;
+     padding: 0;
+ }
+ .cities_select {
+     padding: 5px;
+     z-index: 1060;
+     background-color: white;
+     display: block;
+     position: absolute;
+     list-style-type: none;
+     overflow-y: scroll;
+     height: 300px;
+ }
+ .cities_select li>a {
+     display: block;
+     color: #333;
+     width: 100%;
+ }
+ .cities_select li>a {
+     font-size: 13px;
+     padding: 0 .7rem;
+     cursor: pointer;
+     height: 24px;
+     line-height: 24px;
+ }
+.cont>h3{
+    border-bottom:1px solid #969696;
+    padding-bottom: 10px;
+    padding-left:5px;
+    font-weight: bold;
+}
+label{
+    font-weight: normal;
+}
+input{
+    text-decoration: none;
+ }
+.arenda_view{
+    margin-top:40px;
+}
+ .arenda_view label{
+     font-size:18px;
+     margin-right: 20px;
+     font-weight: bold;
+     cursor: pointer;
+
+ }
+ .arenda_view input{
+     margin-right: 5px;
+ }
+.ad_add_title{
+    font-size:18px;
+    font-weight: bold;
+}
+.ad_div{
+    padding:  10px 0 0 0;
+    min-height: 202px;
+}
+.ad_image_div{
+}
+ .ad_info_div{
+     padding:0 0 0 10px;
+ }
+ .main_cat_item{
+     height: 93px;
+     margin:10px 10px 0px 10px;
+     -webkit-user-select: none;
+     -khtml-user-select: none;
+     -moz-user-select: none;
+     -ms-user-select: none;
+     user-select: none;
+ }
+ .main_cat_item:hover{
+     background-color: #a0f1ff;
+     cursor: pointer;
+ }
+.main_cat_item.active{
+    background-color: #a0f1ff;
+    -webkit-box-shadow: inset 0px 0px 19px 1px rgba(0,0,0,0.75);
+    -moz-box-shadow: inset 0px 0px 19px 1px rgba(0,0,0,0.75);
+    box-shadow: inset 0px 0px 10px 0px rgba(0,0,0,0.75);
+}
+ .item_img img{
+     width:42px;
+ }
+ .item_img{
+     padding:0;
+ }
+ .item_row{
+     padding:10px;
+ }
+ .item_text header{
+     font-size:20px;
+     font-weight: bold;
+ }
+ .item_text footer{
+     font-size: 14px;
+     font-weight: bold;
+ }
+ .item_text{
+     padding-left:10px;
+ }
+ .cats_add .col-md-4{
+     width:31.33333%
+ }
+ .cats_add{
+     margin-top:40px;
+ }
+ .cats_list ul{
+     list-style-type: none;
+     padding:0;
+     float:left;
+     font-size: 15px;
+     font-weight: bold;
+ }
+ .cats_list li{
+     margin:15px 10px 0 10px;
+ }
+ .cats_list li>a{
+     color:#272d31;
+     border-bottom:1px solid #272d31;
+     line-height: 0.9;
+ }
+ .cats_list li>a:hover{
+     text-decoration: none;
+     color:#00B8D9;
+     border-bottom:1px solid #00B8D9;
+ }
+ .cats_list>ul:nth-child(2n+1){
+     margin-left:40px;
+ }
+.cats_next_list{
+    background-color:#dde6e9;
+    min-height:200px;
+    margin-bottom:40px;
+}
+.cats_first{
+    margin-bottom:40px;
+}
+
+
+.arenda_type_row label {
+    height: 66px;
+     width: 66px;
+     display: block;
+    border:1px solid  #00B8D9;
+    border-radius: 50px;
+    margin:0 auto;
+    position: relative;
+ }
+ .arenda_type_row input[type="checkbox"]{
+     display:none;
+ }
+ .arenda_type_row input[type="checkbox"] + span {
+     position: absolute;
+     left: 0; top: 0;
+     width: 100%;
+     height: 100%;
+     cursor: pointer;
+ }
+ .arenda_type_row input[type="checkbox"]:checked + span {
+     background-color:#a0f1ff;
+     border-radius: 50px;
+     -webkit-box-shadow: inset 0px 0px 19px 1px rgba(0,0,0,0.75);
+     -moz-box-shadow: inset 0px 0px 19px 1px rgba(0,0,0,0.75);
+     box-shadow: inset 0px 0px 7px 0px rgba(0,0,0,0.60);
+
+ }
+ .arenda_type_col{
+     text-align: center;
+ }
+ .arenda_type_row .ad_add_title{
+     margin-bottom:25px;
+ }
+ .arenda_type_title{
+     font-weight: bold;
+     font-size: 15px;
+ }
+ .type_a{
+     color:#00b8d9;
+     font-size: 20px;
+     font-weight: bold;
+     margin-bottom:0;
+ }
+ .sel_city a, .sel_city a:focus{
+     color:black;
+     text-decoration: underline;
+ }
+ .cats_bread a{
+     border-bottom:1px solid #008797;
+     margin-left:10px;
+     color:#008797;
+
+ }
+ .cats_bread a:hover{
+     text-decoration: none;
+ }
+ .dlya{
+     color:black;
+ }
+ .span_type{
+     border-bottom:1px solid #00b8d9;
+ }
+ .span_type:hover{
+     cursor:pointer;
+ }
+ .arenda_type_img img{
+     position: relative;
+     top:50%;
+     transform: translateY(-50%);
+ }
+ .arenda_type_col{
+     -webkit-user-select: none;
+     -khtml-user-select: none;
+     -moz-user-select: none;
+     -ms-user-select: none;
+     user-select: none;
+ }
+ .dlya+a{
+     margin-left:0;
+ }
+ .steps{
+     text-align: center;
+     font-size: 15px;
+     font-weight: bold;
+ }
+ .active_step{
+     background-color:#A0F1FF;
+ }
+ .no_active_step{
+     /* IE10+ */
+     background-image: -ms-linear-gradient(left, #FFFFFF 0%, #E5E5E5 100%);
+
+     /* Mozilla Firefox */
+     background-image: -moz-linear-gradient(left, #FFFFFF 0%, #E5E5E5 100%);
+
+     /* Opera */
+     background-image: -o-linear-gradient(left, #FFFFFF 0%, #E5E5E5 100%);
+
+     /* Webkit (Safari/Chrome 10) */
+     background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #FFFFFF), color-stop(100, #E5E5E5));
+
+     /* Webkit (Chrome 11+) */
+     background-image: -webkit-linear-gradient(left, #FFFFFF 0%, #E5E5E5 100%);
+
+     /* W3C Markup */
+     background-image: linear-gradient(to right, #FFFFFF 0%, #E5E5E5 100%);
+ }
+ .steps>div{
+ }
+ .steps{
+     border:1px solid #dadada;
+
+ }
+
+ .treug{
+     padding:0 !important;
+     height:40px;
+     border-style: solid;
+     border-width: 20px 0 20px 10px;
+     border-color: transparent transparent transparent #A0F1FF;
+     line-height: 0px;
+     _border-color: #000000 #000000 #000000 #A0F1FF;
+     _filter: progid:DXImageTransform.Microsoft.Chroma(color='#000000');
+ }
+ .treug_gr{
+     padding:0 !important;
+     height:40px;
+     border-style: solid;
+     border-width: 20px 0 20px 10px;
+     border-color: transparent transparent transparent #e5e5e5;
+     line-height: 0px;
+     _border-color: #000000 #000000 #000000 #e5e5e5;
+     _filter: progid:DXImageTransform.Microsoft.Chroma(color='#000000');
+ }
+ .block::after {
+     content: '';
+     position: absolute; /* Абсолютное позиционирование */
+     left: 20px; bottom: -20px; /* Положение треугольника */
+     border: 20px solid transparent;	border-left: 20px solid green;
+ }
+ .step_row>div{
+     padding:10px 0 10px 0;
+
+ }
+ .step_row{
+     padding:2px;
+ }

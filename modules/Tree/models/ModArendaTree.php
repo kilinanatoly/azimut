@@ -3,6 +3,7 @@
 namespace app\modules\Tree\models;
 
 
+use app\models\Products;
 use app\modules\Tree\Tree;
 use Yii;
 use yii\helpers\Url;
@@ -109,6 +110,43 @@ class ModArendaTree extends \yii\db\ActiveRecord
 
             $this->view_cat($arr,$arr[$parent_id][$i]['id']);
             $this->tree.= '</li>';
+        }
+
+        $this->tree.='</ul>';
+        return $this->tree;
+    }
+    function view_cat_products($arr,$parent_id = 0) {
+        //Условия выхода из рекурсии
+        if(empty($arr[$parent_id])) {
+            return $this->tree;
+        }
+        $this->tree.='<ul>';
+        //перебираем в цикле массив и выводим на экран
+        for($i = 0; $i < count($arr[$parent_id]);$i++) {
+            $products = Products::find()->where(['cat_id'=>$arr[$parent_id][$i]['id']])->all();
+            $product_list='<ul>';
+            foreach ($products as $key => $value) {
+
+                $product_list.='<li>'.$value['name'].'</li>';
+            }
+            $product_list.='</ul>';
+
+            $this->tree.='<li>
+                <span class="pl glyphicon glyphicon-chevron-down"></span>
+                <a class="pll" href="#">'
+                .$arr[$parent_id][$i]['name'].'
+                </a>
+
+                 '.(!empty($arr[$arr[$parent_id][$i]['id']]) ? '<b style="margin-left:3px;">Добавить нельзя</b>': '
+                  <a href="'.Url::to(['/products/create', 'parent_id' =>$arr[$parent_id][$i]['id']]).'">
+                    <span style = "margin-left:5px;color:#4BBC07" class="glyphicon glyphicon-plus" title="Добавить"></span>
+                </a>').'
+                 '  ;
+
+            //рекурсия - проверяем нет ли дочерних категорий
+
+            $this->view_cat_products($arr,$arr[$parent_id][$i]['id']);
+            $this->tree.= $product_list.'</li>';
         }
 
         $this->tree.='</ul>';

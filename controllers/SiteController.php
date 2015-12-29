@@ -2,6 +2,8 @@
 
 namespace app\controllers;
 
+use app\modules\regions\models\ModArendaRegions;
+use app\modules\Tree\models\ModArendaTree;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -52,6 +54,26 @@ class SiteController extends Controller
         return $this->render('index');
     }
 
+    public function actionCatalog($item){
+        if (strrpos($item,'/')){
+            $item = trim(substr($item,strrpos($item,'/'),strlen($item)-strrpos($item,'/')));
+        } else $item = trim($item);
+
+        $result = ModArendaTree::findOne(['url'=>$item]);
+        if (!$result) exit ('net');
+
+        $result_parent = ModArendaTree::find()
+            ->select(['mod_arenda_tree.*','images_for_cats.url AS image'])
+            ->leftJoin('images_for_cats','images_for_cats.cat_id=mod_arenda_tree.id')
+            ->groupBy('mod_arenda_tree.id')
+            ->where(['parent_id'=>$result->id])
+            ->asArray()
+            ->all();
+        if ($result_parent) return $this->render('cats',['data'=>$result_parent]);
+        else {
+            return $this->render('tovars',['data'=>123]);
+        }
+    }
     public function actionLogin()
     {
         if (!\Yii::$app->user->isGuest) {
@@ -74,21 +96,4 @@ class SiteController extends Controller
         return $this->goHome();
     }
 
-    public function actionContact()
-    {
-        $model = new ContactForm();
-        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
-            Yii::$app->session->setFlash('contactFormSubmitted');
-
-            return $this->refresh();
-        }
-        return $this->render('contact', [
-            'model' => $model,
-        ]);
-    }
-
-    public function actionAbout()
-    {
-        return $this->render('about');
-    }
 }

@@ -8,6 +8,7 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
+use yii\db\Query;
 
 AppAsset::register($this);
 ?>
@@ -34,7 +35,7 @@ AppAsset::register($this);
                     <div class="container">
                         <div class="row">
                             <div class="col-lg-12">
-                                <img src="img/azimut-logo.png" class="img-responsive" alt="Логотип">
+                                <img src="/img/azimut-logo.png" class="img-responsive" alt="Логотип">
                             </div>
                         </div>
                     </div>
@@ -52,37 +53,43 @@ AppAsset::register($this);
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Запчасти <b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">Действие</a></li>
-                                <li><a href="#">Другое действие</a></li>
-                                <li><a href="#">Что-то еще</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">Отдельная ссылка</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">Еще одна отдельная ссылка</a></li>
+                                <?php
+                                    $query = Yii::$app->db
+                                    ->createCommand('SELECT * FROM mod_arenda_tree WHERE parent_id=174')
+                                    ->queryAll();
+
+                                foreach ($query as $key => $value) {
+                                    echo '<li><a href="#">'.$value['name'].'</a></li>';
+                                }
+                                ?>
                             </ul>
                         </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Аккумуляторы АКБ <b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">Действие</a></li>
-                                <li><a href="#">Другое действие</a></li>
-                                <li><a href="#">Что-то еще</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">Отдельная ссылка</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">Еще одна отдельная ссылка</a></li>
+                                <?php
+                                $query = Yii::$app->db
+                                    ->createCommand('SELECT * FROM mod_arenda_tree WHERE parent_id=176')
+                                    ->queryAll();
+
+                                foreach ($query as $key => $value) {
+                                    echo '<li><a href="#">'.$value['name'].'</a></li>';
+                                }
+                                ?>
                             </ul>
                         </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Шины <b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">Действие</a></li>
-                                <li><a href="#">Другое действие</a></li>
-                                <li><a href="#">Что-то еще</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">Отдельная ссылка</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">Еще одна отдельная ссылка</a></li>
+                                <?php
+                                $query = Yii::$app->db
+                                    ->createCommand('SELECT * FROM mod_arenda_tree WHERE parent_id=175')
+                                    ->queryAll();
+
+                                foreach ($query as $key => $value) {
+                                    echo '<li><a href="#">'.$value['name'].'</a></li>';
+                                }
+                                ?>
                             </ul>
                         </li>
                         <li> <a href="#">Контакты</a> </li>
@@ -97,6 +104,10 @@ AppAsset::register($this);
 
 
 <div class="wrapper">
+    <?= Breadcrumbs::widget([
+        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+        'homeLink'=>['label'=>'Главная','url'=>'/tree/admin']
+    ]) ?>
     <?=$content?>
     <div class="margin8"></div>
     <div class="container-fluid special-buy-container">
@@ -108,42 +119,42 @@ AppAsset::register($this);
         <div class="row">
             <div class="hui">
                 <div class="col-md-2">
-                    <img class="img-responsive" src="img/bat.png" alt="">
+                    <img class="img-responsive" src="/img/bat.png" alt="">
                     <p class="text-center"><a href="#">Аккумулятор STRONG</a></p>
                 </div>
 
                 <div class="col-md-2">
-                    <img class="img-responsive" src="img/bat.png" alt="">
+                    <img class="img-responsive" src="/img/bat.png" alt="">
                     <p class="text-center"><a href="#">Аккумулятор STRONG</a></p>
                 </div>
 
                 <div class="col-md-2">
-                    <img class="img-responsive" src="img/bat.png" alt="">
+                    <img class="img-responsive" src="/img/bat.png" alt="">
                     <p class="text-center"><a href="#">Аккумулятор STRONG</a></p>
                 </div>
 
                 <div class="col-md-2">
-                    <img class="img-responsive" src="img/bat.png" alt="">
+                    <img class="img-responsive" src="/img/bat.png" alt="">
                     <p class="text-center"><a href="#">Аккумулятор STRONG</a></p>
                 </div>
 
                 <div class="col-md-2">
-                    <img class="img-responsive" src="img/bat.png" alt="">
+                    <img class="img-responsive" src="/img/bat.png" alt="">
                     <p class="text-center"><a href="#">Аккумулятор STRONG</a></p>
                 </div>
 
                 <div class="col-md-2">
-                    <img class="img-responsive" src="img/bat.png" alt="">
+                    <img class="img-responsive" src="/img/bat.png" alt="">
                     <p class="text-center"><a href="#">Аккумулятор STRONG</a></p>
                 </div>
 
                 <div class="col-md-2">
-                    <img class="img-responsive" src="img/bat.png" alt="">
+                    <img class="img-responsive" src="/img/bat.png" alt="">
                     <p class="text-center"><a href="#">Аккумулятор STRONG</a></p>
                 </div>
 
                 <div class="col-md-2">
-                    <img class="img-responsive" src="img/bat.png" alt="">
+                    <img class="img-responsive" src="/img/bat.png" alt="">
                     <p class="text-center"><a href="#">Аккумулятор STRONG</a></p>
                 </div>
 
@@ -181,7 +192,7 @@ AppAsset::register($this);
                 <h2>Наши контакты</h2>
                 <div class="line"></div>
                 <div class="row">
-                    <div class="col-md-1"><img class="img-responsive" src="img/phone.png" alt="Телефон"></div>
+                    <div class="col-md-1"><img class="img-responsive" src="/img/phone.png" alt="Телефон"></div>
                     <div class="col-md-11">
                         <p><b>Телефон:</b></p>
                         <p><a href="#">8(960)-085-41-39</a></p>
@@ -190,7 +201,7 @@ AppAsset::register($this);
                     <div class="clearfix"></div>
                     <div class="margin3"></div>
 
-                    <div class="col-md-1"><img class="img-responsive" src="img/email.png" alt="Email"></div>
+                    <div class="col-md-1"><img class="img-responsive" src="/img/email.png" alt="Email"></div>
                     <div class="col-md-11">
                         <p><b>EMAIL:</b></p>
                         <p><a href="#">azimut@ya.ru</a></p>
@@ -198,7 +209,7 @@ AppAsset::register($this);
                     <div class="clearfix"></div>
                     <div class="margin3"></div>
 
-                    <div class="col-md-1"><img class="img-responsive" src="img/home.png" alt="Адрес"></div>
+                    <div class="col-md-1"><img class="img-responsive" src="/img/home.png" alt="Адрес"></div>
                     <div class="col-md-11">
                         <p><b>Адрес:</b></p>
                         <p>1 автодорога, поворот на БСИ</p>
@@ -207,7 +218,7 @@ AppAsset::register($this);
                     <div class="clearfix"></div>
                     <div class="margin3"></div>
 
-                    <div class="col-md-1"><img class="img-responsive" src="img/twitter.png" alt="twitter"></div>
+                    <div class="col-md-1"><img class="img-responsive" src="/img/twitter.png" alt="twitter"></div>
                     <div class="col-md-11">
                         <p><b>Twitter:</b></p>
                         <p><a href="#">Azimut</a></p>

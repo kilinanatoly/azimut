@@ -70,7 +70,7 @@ echo $session->getFlash('delete_cat');
     <?php
         if (!empty($icon))
         {
-            echo '<img  src="/images/cats_images/'.$icon->cat_id.'/'.$icon->url.'">';
+            echo '<img  src="/img/cats_images/'.$icon->cat_id.'/'.$icon->url.'">';
         }
     ?>
 

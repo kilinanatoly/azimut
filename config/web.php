@@ -41,13 +41,10 @@ $config = [
             'showScriptName' => false,
             'enablePrettyUrl' => true,
             'rules' => [
-                '/register/'=>'site/register',
-                '/login'=>'/site/login',
-                '/admin'=>'/tree/admin',
                 '/admin'=>'/tree/admin',
                 '/'=>'/site/index',
-                '<city:\D+>/arenda' => 'arenda/default/index',
-                '<city:\w+>/arenda/default/<action:\w+>' => 'arenda/default/index',
+                'catalog/<item:\D+>' => '/site/catalog',
+
                 //'<city:\D+>' => 'arenda/default/index',
             ],
         ],

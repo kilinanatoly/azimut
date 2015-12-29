@@ -10,9 +10,9 @@ $this->title = 'My Yii Application';
             <div class="row">
                 <div class="col-md-12">
                     <div class="your-class">
-                        <div><p class="text_slider">asd</p><img class="img-responsive" src="img/1.jpg" alt=""></div>
-                        <div><img class="img-responsive" src="img/3.jpg" alt=""></div>
-                        <div><img class="img-responsive" src="img/2.jpg" alt=""></div>
+                        <div><p class="text_slider">asd</p><img class="img-responsive" src="/img/1.jpg" alt=""></div>
+                        <div><img class="img-responsive" src="/img/3.jpg" alt=""></div>
+                        <div><img class="img-responsive" src="/img/2.jpg" alt=""></div>
                     </div>
                 </div>
             </div>
@@ -32,15 +32,15 @@ $this->title = 'My Yii Application';
                     <div class="row index-catalog">
                         <div class="col-md-4">
                             <h3 class="text-center"><a href="#">Запчасти</a></h3>
-                            <a href="#"><img class="img-responsive" src="img/gear.png" alt="Запчасти"></a>
+                            <a href="#"><img class="img-responsive" src="/img/gear.png" alt="Запчасти"></a>
                         </div>
                         <div class="col-md-4">
                             <h3 class="text-center"><a href="#">Аккумуляторы АКБ</a></h3>
-                            <a href="#"><img class="img-responsive battery-img" src="img/batteries.png" alt="АКБ"></a>
+                            <a href="#"><img class="img-responsive battery-img" src="/img/batteries.png" alt="АКБ"></a>
                         </div>
                         <div class="col-md-4">
                             <h3 class="text-center"><a href="#">Шины</a></h3>
-                            <a href="#"><img class="img-responsive" src="img/tire.png" alt="Шины"></a>
+                            <a href="#"><img class="img-responsive" src="/img/tire.png" alt="Шины"></a>
                         </div>
                     </div>
                 </div>

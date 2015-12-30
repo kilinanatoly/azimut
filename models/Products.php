@@ -27,6 +27,8 @@ class Products extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+    public $imageFile;
+
     public function rules()
     {
         return [
@@ -35,7 +37,9 @@ class Products extends \yii\db\ActiveRecord
             [['regdate'], 'safe'],
             [['price'], 'number'],
             [['active','cat_id'], 'integer'],
-            [['name'], 'string', 'max' => 255]
+            [['name'], 'string', 'max' => 255],
+            [['imageFile'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg','checkExtensionByMimeType'=>false],
+
         ];
     }
 
@@ -51,6 +55,17 @@ class Products extends \yii\db\ActiveRecord
             'regdate' => 'Regdate',
             'price' => 'Цена',
             'active' => 'Активность',
+            'imageFile' => 'Картинка',
         ];
+    }
+
+    public function upload()
+    {
+        if ($this->validate()) {
+            $this->imageFile->saveAs('img/products/' . md5($this->imageFile->baseName.date("Y-m-d-H-i-s")) . '.' . $this->imageFile->extension);
+            return true;
+        } else {
+            return false;
+        }
     }
 }

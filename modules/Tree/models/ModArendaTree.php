@@ -127,7 +127,11 @@ class ModArendaTree extends \yii\db\ActiveRecord
             $product_list='<ul>';
             foreach ($products as $key => $value) {
 
-                $product_list.='<li>'.$value['name'].'</li>';
+                $product_list.='<li>товар:'.$value['name'].'
+                <a href="'.Url::to(['/products/edit', 'id' => $value['id']]).'"><span class="glyphicon glyphicon-pencil" title="Редактировать"></span></a>
+                <a href="'.Url::to(['/products/delete', 'id' => $value['id']]).'"><span class="glyphicon glyphicon-trash" title="Удалить"></span></a>
+
+                </li>';
             }
             $product_list.='</ul>';
 

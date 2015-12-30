@@ -9,19 +9,24 @@ return [
                 'name'=>'Категории',
                 'url'=>'/tree/admin'
             ],
-            'zapchasti'=>[
+            'characteristics'=>[
                 'id'=>2,
+                'name'=>'Технические характеристики',
+                'url'=>'/tree/admin/charact'
+            ],
+            'zapchasti'=>[
+                'id'=>3,
                 'name'=>'Запчасти',
                 'url'=>'/products/zapchasti'
             ],
             'shiny'=>[
-                'id'=>3,
+                'id'=>4,
                 'name'=>'Шины',
                 'url'=>'/products/shiny'
             ]
             ,
             'akb'=>[
-                'id'=>4,
+                'id'=>5,
                 'name'=>'АКБ',
                 'url'=>'/products/akb'
             ]

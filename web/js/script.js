@@ -8,5 +8,19 @@ $(document).ready(function(){
   autoplay: false,
   autoplaySpeed: 2000,
 });
-		
+
+
+  if ($('div').is('.characteristics')){
+    $.ajax({
+      type: "GET",
+      url: "/site/getcharacteristics?id="+$("#parent_id").val(),
+      success: function(html){
+        if (html!='empty'){
+          $('.characteristics').html(html);
+        }
+        else{
+        }
+      }
+    });
+  }
 });

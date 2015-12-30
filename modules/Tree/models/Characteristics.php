@@ -27,7 +27,7 @@ class Characteristics extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'type'], 'required'],
+            [['name'], 'required'],
         ];
     }
 

@@ -2,7 +2,9 @@
 
 namespace app\controllers;
 
+use app\modules\arenda\models\Characteristics;
 use app\modules\regions\models\ModArendaRegions;
+use app\modules\Tree\models\CharacteristicsForCats;
 use app\modules\Tree\models\ModArendaTree;
 use Yii;
 use yii\filters\AccessControl;
@@ -94,6 +96,50 @@ class SiteController extends Controller
         Yii::$app->user->logout();
 
         return $this->goHome();
+    }
+
+    public function actionGetcharacteristics($id)
+    {
+        $result = CharacteristicsForCats::find()
+            ->select(['characteristics_for_cats.*','characteristics.name AS characteristic_name'])
+            ->where(['cat_id'=>$id])
+            ->leftJoin('characteristics','characteristics_for_cats.character_id=characteristics.id')
+            ->asArray()
+            ->all();
+        if (empty($result)){
+            $cat = ModArendaTree::findOne(['id'=>$id]);
+            while ($cat->parent_id!=0){
+                $result = CharacteristicsForCats::find()
+                    ->select(['characteristics_for_cats.*','characteristics.name AS characteristic_name','characteristics_products.value'])
+                    ->where(['cat_id'=>$cat->parent_id])
+                    ->leftJoin('characteristics','characteristics_for_cats.character_id=characteristics.id')
+                    ->leftJoin('characteristics_products',['characteristics_products'])
+                    ->asArray()
+                    ->all();
+                if (!empty($result)) break;
+                $cat = ModArendaTree::findOne(['id'=>$cat->parent_id]);
+            }
+        }else{
+        }
+        if (!empty($result)){
+            echo '<pre>';
+            print_r($result);
+            echo '</pre>';die;
+            $html='';
+            foreach ($result as $key => $value) {
+                $html.='
+                <div class="form-group">
+                    <label><p>'.$value['characteristic_name'].'</p>
+                    <input type="text" class="form-control" name="character['.$value['character_id'].']" >
+                    </label>
+                </div>
+                ';
+            }
+            return $html;
+
+        }else{
+            return 'empty';
+        }
     }
 
 }

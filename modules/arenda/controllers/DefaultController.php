@@ -258,7 +258,6 @@ class DefaultController extends Controller
 
     public function actionGetcharacteristics($id)
     {
-
         $model = new Characteristics();
         $result = $model->getCharacteristics($id);
         while (empty($result))

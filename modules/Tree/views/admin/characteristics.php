@@ -11,7 +11,6 @@ echo $session->getFlash('char');
 <?php $form = ActiveForm::begin(); ?>
 
 <?= $form->field($model, 'name')->label('Добавить характеристику') ?>
-<?= $form->field($model, 'type')->radioList(['radio' => 'Радио кнопка', 'checkbox' => 'Чекбокс', 'textinput' => 'Текстовое поле', 'textarea' => 'Большое текстовое поле', 'select' => 'Выпадающий список']); ?>
 
 <div class="form-group">
     <?= Html::submitButton('Добавить характеристику', ['class' => 'btn btn-primary']) ?>
@@ -21,25 +20,25 @@ echo $session->getFlash('char');
 <?php
 echo '<div class="list-group">';
 foreach ($data as $key => $value) {
-    switch ($value['type']) {
-        case 'checkbox':
-            $type="чекбокс (много из многих)";
-            break;
-        case 'select':
-            $type="выпадающий список (один из многих)";
-            break;
-        case 'radio':
-            $type="радио группа (один из многих)";
-            break;
-        case 'textinput':
-            $type="маленькое текстовое поле";
-            break;
-        case 'textarea':
-            $type="большое текстовое поле";
-            break;
-    }
+//    switch ($value['type']) {
+//        case 'checkbox':
+//            $type="чекбокс (много из многих)";
+//            break;
+//        case 'select':
+//            $type="выпадающий список (один из многих)";
+//            break;
+//        case 'radio':
+//            $type="радио группа (один из многих)";
+//            break;
+//        case 'textinput':
+//            $type="маленькое текстовое поле";
+//            break;
+//        case 'textarea':
+//            $type="большое текстовое поле";
+//            break;
+//    }
     echo '
- <a href="' . Url::to(['/tree/admin/viewcharact', 'id' => $value['id']]) . '" class="list-group-item">'. $value['name'] .',<b>Тип: </b><i>'.$type.'</i></a>
+ <a href="' . Url::to(['/tree/admin/viewcharact', 'id' => $value['id']]) . '" class="list-group-item">'. $value['name'] .'</a>
 
 
     ';

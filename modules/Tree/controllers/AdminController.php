@@ -81,6 +81,7 @@ class AdminController extends Controller
         $_SESSION['menu'] = 1;
         $model = new ModArendaTree();
         if ($model->load(Yii::$app->request->post())) {
+
             $function_model = new Functions();
             $model->parent_id = $id;
             $s = ModArendaTree::find()->where(['parent_id'=>$id])->orderBy("sort DESC")->one();
@@ -193,7 +194,9 @@ class AdminController extends Controller
         return $this->render('edit', [
             'icon'=>$icon,
             'model_upload'=>$model_upload,
-            'model' => $item, 'all_cats' => $tree->view_cat_for_parent($tree->get_cat()), 'all_characters' => $all_characters, 'active_cats' => $active_cats, 'active_podcats' => $active_podcats,
+            'model' => $item,
+            'all_cats' => $tree->view_cat_for_parent($tree->get_cat()),
+            'all_characters' => $all_characters, 'active_cats' => $active_cats, 'active_podcats' => $active_podcats,
         ]);
     }
 
@@ -308,13 +311,7 @@ class AdminController extends Controller
                 }
             }
         }
-        if (Yii::$app->request->post('delete_character_data')) {
-            $del_items = Yii::$app->request->post('delete_character_data');
-            foreach ($del_items as $key => $value) {
-                $character_data = CharacteristicsData::findOne(['id' => $key]);
-                $character_data->delete();
-            }
-        }
+
         if (Yii::$app->request->post('delete_character')) {
             $del_items = Yii::$app->request->post('delete_character');
             foreach ($del_items as $key => $value) {
@@ -323,39 +320,9 @@ class AdminController extends Controller
             }
             return $this->redirect('/tree/admin/charact');
         }
-        if (!empty($model_data->load(Yii::$app->request->post()))) {
-            $data = Yii::$app->request->post();
-            if (!empty($data['CharacteristicsData']['name'])) {
-                foreach ($data['CharacteristicsData']['name'] as $key => $value) {
-                    $model_data = new CharacteristicsData();
-                    $model_data->name = $data['CharacteristicsData']['name'][$key];
-                    if (empty($model_data->name)) {
-                        continue;
-                    }
-                    $model_data->parent_id = $data['CharacteristicsData']['parent_id'][$key];
-                    if ($model_data->save()){
-                        $session = Yii::$app->session;
-                        $session->setFlash('char_data', '<div class="alert alert-success">Вы успешно добавили данные.</div>');
-                        $idd = Yii::$app->db->getLastInsertID();
 
-                        $model1 = new ModArendaTree();
-                        $result = $model1->find()->all();
-                        $batchmas = [];
-                        foreach ($result as $key=>$value){
-                            $batchmas[] = [
-                                'character_data_id'=>$idd,
-                                'cat_id'=>$value->id,
-                            ];
-                        }
-                        //Yii :: $app -> db -> createCommand ()-> batchInsert ( 'characteristics_data_for_cats' ,  [  'character_data_id' ,  'cat_id' ],$batchmas)-> execute ();
-                    }
-
-                }
-            }
-
-        }
         if (Yii::$app->request->post()) {
-            $char_id = key(Yii::$app->request->post('CharacteristicsData')['parent_id']);
+            $char_id = $_GET['id'];
 
             CharacteristicsForCats::deleteAll(['character_id' => $char_id]);
             if (Yii::$app->request->post('cats')) {

@@ -146,6 +146,13 @@ class ProductsController extends Controller
 
                 }
                 if ($model->save()){
+                    $last_id = $_GET['id'];
+                    foreach (Yii::$app->request->post('character') as $key => $value) {
+                            $model1 =  CharacteristicsProducts::findOne(['product_id'=>$last_id,'character_id'=>$key]);
+                            $model1->character_id = $key;
+                            $model1->value = empty($value) ? 'none' : $value;
+                            $model1->save();
+                    }
                 }
                 // form inputs are valid, do something here
             }

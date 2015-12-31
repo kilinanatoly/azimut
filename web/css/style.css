@@ -228,3 +228,6 @@ footer>.container-fluid{
 	margin:0 auto;
 	margin-bottom:20px;
 }
+.tovar{
+	border:1px solid black;
+}

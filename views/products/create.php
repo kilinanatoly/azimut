@@ -2,6 +2,7 @@
 @session_start();
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use dosamigos\ckeditor\CKEditor;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Products */
@@ -15,11 +16,14 @@ $this->params['breadcrumbs'][] = $this->title ;
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]) ?>
 
         <?= $form->field($model, 'name')->textInput()->label('Название') ?>
-        <?= $form->field($model, 'description')->textarea()->label('Описание продукта') ?>
+    <?= $form->field($model, 'description')->widget(CKEditor::className(), [
+        'options' => ['rows' => 6],
+    ]) ?>
         <?= $form->field($model, 'price')->textInput()->label('Цена (0 - по запросу)') ?>
         <?= $form->field($model, 'imageFile')->fileInput() ?>
 
         <?= $form->field($model, 'active')->checkbox() ?>
+        <?= $form->field($model, 'special')->checkbox() ?>
 
 
         <div class="characteristics">

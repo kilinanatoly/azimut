@@ -35,7 +35,7 @@ class Products extends \yii\db\ActiveRecord
             [['name', 'description', 'price', 'active'], 'required'],
             [['description'], 'string'],
             [['regdate'], 'safe'],
-            [['price'], 'number'],
+            [['price','special'], 'number'],
             [['active','cat_id'], 'integer'],
             [['name'], 'string', 'max' => 255],
             [['imageFile'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg','checkExtensionByMimeType'=>false],
@@ -56,6 +56,7 @@ class Products extends \yii\db\ActiveRecord
             'price' => 'Цена',
             'active' => 'Активность',
             'imageFile' => 'Картинка',
+            'special' => 'Спецпредложение?',
         ];
     }
 

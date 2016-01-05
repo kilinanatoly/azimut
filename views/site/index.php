@@ -31,16 +31,16 @@ $this->title = 'My Yii Application';
                     <hr>
                     <div class="row index-catalog">
                         <div class="col-md-4">
-                            <h3 class="text-center"><a href="#">Запчасти</a></h3>
-                            <a href="#"><img class="img-responsive" src="/img/gear.png" alt="Запчасти"></a>
+                            <h3 class="text-center"><a href="/catalog/zapchasti">Запчасти</a></h3>
+                            <a href="/catalog/zapchasti"><img class="img-responsive" src="/img/gear.png" alt="Запчасти"></a>
                         </div>
                         <div class="col-md-4">
-                            <h3 class="text-center"><a href="#">Аккумуляторы АКБ</a></h3>
-                            <a href="#"><img class="img-responsive battery-img" src="/img/batteries.png" alt="АКБ"></a>
+                            <h3 class="text-center"><a href="/catalog/akb">Аккумуляторы АКБ</a></h3>
+                            <a href="/catalog/akb"><img class="img-responsive battery-img" src="/img/batteries.png" alt="АКБ"></a>
                         </div>
                         <div class="col-md-4">
-                            <h3 class="text-center"><a href="#">Шины</a></h3>
-                            <a href="#"><img class="img-responsive" src="/img/tire.png" alt="Шины"></a>
+                            <h3 class="text-center"><a href="/catalog/shiny">Шины</a></h3>
+                            <a href="/catalog/shiny"><img class="img-responsive" src="/img/tire.png" alt="Шины"></a>
                         </div>
                     </div>
                 </div>
@@ -54,42 +54,12 @@ $this->title = 'My Yii Application';
                 <div class="panel-heading">
                     <h3 class="panel-title ">Новости</h3>
                 </div>
+
                 <div class="panel-body">
-                    <article>
-                        <header>
-                            <p class="text-right PT"><a href="#"> Название новости</a></p>
-                            <p class="text-justify news_text">Рыбным текстом называется текст, служащий для временного наполнения макета в публикациях или производстве веб-сайтов, пока финальный текст еще не создан.</p>
-                            <p class="news_date pull-right">11.11.2015</p>
-                            <div class="clearfix"></div>
-                        </header>
-                        <footer>
-                            <p class="text-right podrobnee"><a  class="btn btn-default">Подробнее</a></p>
-                        </footer>
-                    </article>
-
-                    <article>
-                        <header>
-                            <p class="text-right PT"><a href="#"> Название новости</a></p>
-                            <p class="text-justify news_text">Рыбным текстом называется текст, служащий для временного наполнения макета в публикациях или производстве веб-сайтов, пока финальный текст еще не создан.</p>
-                            <p class="news_date pull-right">11.11.2015</p>
-                            <div class="clearfix"></div>
-                        </header>
-                        <footer>
-                            <p class="text-right podrobnee"><a  class="btn btn-default">Подробнее</a></p>
-                        </footer>
-                    </article>
-
-                    <article>
-                        <header>
-                            <p class="text-right PT"><a href="#"> Название новости</a></p>
-                            <p class="text-justify news_text">Рыбным текстом называется текст, служащий для временного наполнения макета в публикациях или производстве веб-сайтов, пока финальный текст еще не создан.</p>
-                            <p class="news_date pull-right">11.11.2015</p>
-                            <div class="clearfix"></div>
-                        </header>
-                        <footer>
-                            <p class="text-right podrobnee"><a  class="btn btn-default">Подробнее</a></p>
-                        </footer>
-                    </article>
+                    <?php
+                    $model = new \app\models\News();
+                    $model->news_list(5);
+                    ?>
 
                 </div>
             </div>

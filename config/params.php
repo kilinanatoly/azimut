@@ -30,6 +30,30 @@ return [
                 'name'=>'АКБ',
                 'url'=>'/products/akb'
             ]
+            ,
+            'callme'=>[
+                'id'=>6,
+                'name'=>'"Позвоните мне"',
+                'url'=>'/products/akb'
+            ]
+            ,
+            'callme1'=>[
+                'id'=>7,
+                'name'=>'"Запросы стоимости товара"',
+                'url'=>'/products/akb'
+            ]
+            ,
+            'callme2'=>[
+                'id'=>8,
+                'name'=>'"Запросы счета на оплату"',
+                'url'=>'/products/akb'
+            ]
+            ,
+            'news'=>[
+                'id'=>9,
+                'name'=>'Новости',
+                'url'=>'/news'
+            ]
 
 
         ]

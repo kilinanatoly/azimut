@@ -24,7 +24,7 @@ class UploadFile1 extends Model
     {
         if (!empty($this->imageFile)){
             if ($this->validate()) {
-                if (!file_exists("../web/images/cats_images/".$cat_id))
+                if (!file_exists("../web/img/cats_images/".$cat_id))
                 {
                     mkdir("../web/img/cats_images/".$cat_id, 0777);
                 }
@@ -53,7 +53,7 @@ class UploadFile1 extends Model
     {
         if (!empty($this->imageFile)){
             if ($this->validate()) {
-                if (!file_exists("../web/images/arenda_types_images/".$arenda_type_id))
+                if (!file_exists("../web/img/arenda_types_images/".$arenda_type_id))
                 {
                     mkdir("../web/img/arenda_types_images/".$arenda_type_id, 0777);
                 }
@@ -85,7 +85,7 @@ class UploadFile1 extends Model
                 }
 
                 $image_name = md5($this->imageFile1->baseName).date('His') . '.' . $this->imageFile1->extension;
-                $this->imageFile1->saveAs('images/arenda_types_images/'.$arenda_type_id.'/'. $image_name);
+                $this->imageFile1->saveAs('img/arenda_types_images/'.$arenda_type_id.'/'. $image_name);
                 $model = ImagesForArendaTypes::findOne(['arenda_type_id'=>$arenda_type_id]);
                 if (!empty($model)){
                     if (file_exists("../web/img/arenda_types_images/".$arenda_type_id.'/'.$model->url_black)){

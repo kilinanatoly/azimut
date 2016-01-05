@@ -112,13 +112,12 @@ class ProductsController extends Controller
                 if ($model->save()){
                     $last_id = Yii::$app->db->lastInsertID;
                     foreach (Yii::$app->request->post('character') as $key => $value) {
-                        if (!empty($value)){
                             $model1 = new CharacteristicsProducts();
                             $model1->character_id = $key;
                             $model1->product_id = $last_id;
-                            $model1->value = $value;
+                            $model1->value = empty($value) ? 'none' : $value;;
                             $model1->save();
-                        }
+
                     }
                     return $this->redirect('create?parent_id='.$parent_id);
                 }

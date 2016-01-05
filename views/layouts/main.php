@@ -59,7 +59,7 @@ AppAsset::register($this);
                                     ->queryAll();
 
                                 foreach ($query as $key => $value) {
-                                    echo '<li><a href="#">'.$value['name'].'</a></li>';
+                                    echo '<li><a href="/catalog/zapchasti/'.strtolower($value['url']).'">'.$value['name'].'</a></li>';
                                 }
                                 ?>
                             </ul>
@@ -73,7 +73,7 @@ AppAsset::register($this);
                                     ->queryAll();
 
                                 foreach ($query as $key => $value) {
-                                    echo '<li><a href="#">'.$value['name'].'</a></li>';
+                                    echo '<li><a href="/catalog/akb/'.strtolower($value['url']).'">'.$value['name'].'</a></li>';
                                 }
                                 ?>
                             </ul>
@@ -87,7 +87,7 @@ AppAsset::register($this);
                                     ->queryAll();
 
                                 foreach ($query as $key => $value) {
-                                    echo '<li><a href="#">'.$value['name'].'</a></li>';
+                                    echo '<li><a href="/catalog/shiny/'.strtolower($value['url']).'">'.$value['name'].'</a></li>';
                                 }
                                 ?>
                             </ul>
@@ -106,7 +106,7 @@ AppAsset::register($this);
 <div class="wrapper">
     <?= Breadcrumbs::widget([
         'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        'homeLink'=>['label'=>'Главная','url'=>'/tree/admin']
+        'homeLink'=>['label'=>'Главная','url'=>'/   ']
     ]) ?>
     <?=$content?>
     <div class="margin8"></div>
@@ -118,46 +118,24 @@ AppAsset::register($this);
     <div class="container">
         <div class="row">
             <div class="hui">
-                <div class="col-md-2">
-                    <img class="img-responsive" src="/img/bat.png" alt="">
-                    <p class="text-center"><a href="#">Аккумулятор STRONG</a></p>
-                </div>
+                <?php
+                $specials = \app\models\Products::find()
+                ->where(['special'=>'1'])
+                ->orderBy(['id'=>SORT_DESC])
+                ->asArray()
+                ->all();
 
-                <div class="col-md-2">
-                    <img class="img-responsive" src="/img/bat.png" alt="">
-                    <p class="text-center"><a href="#">Аккумулятор STRONG</a></p>
-                </div>
+                foreach ($specials as $key => $value) {
+                    echo '
+                       <div class="col-md-2">
+                            <img class="img-responsive" src="/img/products/'.$value['image'].'" alt="'.$value['name'].'">
+                            <p class="text-center"><a href="#">'.$value['name'].'</a></p>
+                            <p class="text-left">Цена: <span class="pull-right">'.($value['price']==0 ? 'По запросу' : $value['price']).'</span></p>
+                        </div>
+                    ';
+                }
 
-                <div class="col-md-2">
-                    <img class="img-responsive" src="/img/bat.png" alt="">
-                    <p class="text-center"><a href="#">Аккумулятор STRONG</a></p>
-                </div>
-
-                <div class="col-md-2">
-                    <img class="img-responsive" src="/img/bat.png" alt="">
-                    <p class="text-center"><a href="#">Аккумулятор STRONG</a></p>
-                </div>
-
-                <div class="col-md-2">
-                    <img class="img-responsive" src="/img/bat.png" alt="">
-                    <p class="text-center"><a href="#">Аккумулятор STRONG</a></p>
-                </div>
-
-                <div class="col-md-2">
-                    <img class="img-responsive" src="/img/bat.png" alt="">
-                    <p class="text-center"><a href="#">Аккумулятор STRONG</a></p>
-                </div>
-
-                <div class="col-md-2">
-                    <img class="img-responsive" src="/img/bat.png" alt="">
-                    <p class="text-center"><a href="#">Аккумулятор STRONG</a></p>
-                </div>
-
-                <div class="col-md-2">
-                    <img class="img-responsive" src="/img/bat.png" alt="">
-                    <p class="text-center"><a href="#">Аккумулятор STRONG</a></p>
-                </div>
-
+                ?>
 
             </div>
         </div>
@@ -212,7 +190,7 @@ AppAsset::register($this);
                     <div class="col-md-1"><img class="img-responsive" src="/img/home.png" alt="Адрес"></div>
                     <div class="col-md-11">
                         <p><b>Адрес:</b></p>
-                        <p>1 автодорога, поворот на БСИ</p>
+                        <p>1 автодорога, орловское кольцо</p>
                     </div>
 
                     <div class="clearfix"></div>

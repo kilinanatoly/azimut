@@ -13,7 +13,6 @@ font-family: 'PT Sans', sans-serif;
 font-size:16px;
 }
 a{
-	background-color:transparent !important;
 	text-decoration: none !important;
 }
 a:focus{
@@ -121,7 +120,7 @@ color:black !important;
 	width: 10%;
 	margin: 15px 0 20px 0;
 }
-.send_form1 input{
+.send_form1 input,.send_form2 input,.send_form3 input,.send_form4 input{
 	border-radius: 0;
 	padding:20px;
 	border:1px solid rgba(0, 0, 0, 0.47);
@@ -229,5 +228,130 @@ footer>.container-fluid{
 	margin-bottom:20px;
 }
 .tovar{
-	border:1px solid black;
+	border:1px solid #428bca;
+	margin-bottom: 20px;
+	box-shadow: 0 0 10px 3px rgba(221, 221, 221, 1);
+}
+.tovar:hover{
+	border: 1px solid #F2BB7D;
+}
+.tovar header{
+	max-height:140px;
+	text-align: center;
+	margin-bottom:8px;
+	padding:7px;
+
+}
+.tovar header>img{
+	width:100%;
+}
+.noimage{
+	width: 75% !important;
+	margin:0 auto;
+}
+.product_title{
+	min-height:100px;
+	background-color:#428BCA;
+	text-align: center;
+	padding:7px;
+	font-family: "Open Sans";
+	color:white;
+
+}
+.product_price{
+	padding:5px;
+	color:black;
+}
+.product_price p{
+margin:0;
+}
+.view_tovar h2{
+	color:#0078A6;
+	margin-bottom:20px;
+}
+.view_tovar h3{
+	color:#0078A6;
+	margin-top:0;
+}
+.row1{
+	margin-bottom:25px;
+}
+.tovar_price{
+	color:black;
+	font-size: 20px;
+}
+.description_panel{
+	margin-top:30px;
+}
+.panel-default>.panel-heading>h3{
+	color:white;
+}
+.tovar_buttons{
+	text-align: center;
+}
+.tovar_buttons>.btn{
+	border-radius: 0;
+	font-weight: bolder;
+	border:2px solid #FFD400;
+	transition:all 0.3s ease;
+
+}
+.tovar_buttons>.btn:active{
+	border:2px solid #FFD400;
+	opacity: 0.7;
+}
+.tovar_buttons>.btn:hover{
+	opacity: 0.7;
+}
+*,*:focus{
+	outline:none !important;
+}
+#call_me_modal .modal-content,#buy_modal .modal-content,#zapros_price_modal .modal-content{
+	border-radius:0;
+	box-shadow: none;
+	border:1px solid #0078A6;
+}
+#call_me_modal .modal-title,#buy_modal .modal-title,#zapros_price_modal .modal-title{
+	color:#0078A6;
+	text-align: center;
+}
+#call_me_modal .btn-default,#call_me_modal .btn-default:hover,#buy_modal .btn-default,#buy_modal .btn-default:hover,#zapros_price_modal .btn-default,#zapros_price_modal .btn-default:hover{
+	border:1px solid #0078A6;
+	border-radius:0;
+	background-color:transparent;
+}
+.error-text{
+	color:red;
+	text-align: center;
+	font-size: 15px;
+
+}
+.success-text{
+	color:green;
+	text-align: center;
+	font-size: 15px;
+}
+.product header{
+	text-align: center;
+}
+.newspanel{
+	border-radius: 0;
+	border:1px solid #0078A6;
+}
+.newspanel .panel-heading{
+	border-radius: 0;
+	background-color:#0078A6;
+}
+.main-btn{
+	border-radius:0;
+	border:1px solid #0078A6;
+	background-color:transparent;
+}
+.main-btn:hover{
+	border-radius:0;
+	border:1px solid #0078A6;
+	background-color:transparent;
+}
+.podrobnee a:hover{
+	background-color: transparent;
 }

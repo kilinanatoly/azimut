@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
+use dosamigos\ckeditor\CKEditor;
 /* @var $this yii\web\View */
 /* @var $model app\models\Products */
 /* @var $form ActiveForm */
@@ -18,7 +19,9 @@ $this->params['breadcrumbs'][] = $this->title ;
     <?= $form->field($model, 'name')->textInput()->label('Название') ?>
     <?= $form->field($model, 'cat_id')->dropDownList(ArrayHelper::map(\app\modules\Tree\models\ModArendaTree::find()->all(), 'id', 'name'))->label('Категория') ?>
 
-    <?= $form->field($model, 'description')->textarea()->label('Описание продукта') ?>
+    <?= $form->field($model, 'description')->widget(CKEditor::className(), [
+        'options' => ['rows' => 6],
+    ]) ?>
     <?= $form->field($model, 'price')->textInput()->label('Цена (0 - по запросу)') ?>
     <?= $form->field($model, 'imageFile')->fileInput() ?>
     <?php
@@ -26,6 +29,8 @@ $this->params['breadcrumbs'][] = $this->title ;
     ?>
     <div class="clearfix"></div>
     <?= $form->field($model, 'active')->checkbox() ?>
+    <?= $form->field($model, 'special')->checkbox() ?>
+
     <?=$html?>
 
     <div class="form-group">

@@ -115,7 +115,7 @@ class ProductsController extends Controller
                             $model1 = new CharacteristicsProducts();
                             $model1->character_id = $key;
                             $model1->product_id = $last_id;
-                            $model1->value = empty($value) ? 'none' : $value;;
+                            $model1->value = empty($value) ? 'none' : $value;
                             $model1->save();
 
                     }

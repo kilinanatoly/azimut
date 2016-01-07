@@ -11,6 +11,7 @@ use app\assets\AppAsset;
 use yii\db\Query;
 
 AppAsset::register($this);
+@session_start();
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -49,7 +50,7 @@ AppAsset::register($this);
                 </div>
                 <div id="navbarCollapse" class="collapse navbar-collapse navbar-right">
                     <ul class="nav nav-pills">
-                        <li class="active"> <a href="#">Главная</a> </li>
+                        <li <?=($_SESSION['current_str']=='index' ? 'class="active"' : '')?>> <a href="/">Главная</a> </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Запчасти <b class="caret"></b></a>
                             <ul class="dropdown-menu">
@@ -124,12 +125,13 @@ AppAsset::register($this);
                 ->orderBy(['id'=>SORT_DESC])
                 ->asArray()
                 ->all();
-
+                $functions = new \app\modules\regions\models\Functions();
                 foreach ($specials as $key => $value) {
+                    $url = $functions->get_tovar_url($value['id']);
                     echo '
                        <div class="col-md-2">
-                            <img class="img-responsive" src="/img/products/'.$value['image'].'" alt="'.$value['name'].'">
-                            <p class="text-center"><a href="#">'.$value['name'].'</a></p>
+                            <a href="'.$url.'"><img class="img-responsive" src="/img/products/'.$value['image'].'" alt="'.$value['name'].'"></a>
+                            <p class="text-center"><a href="'.$url.'">'.$value['name'].'</a></p>
                             <p class="text-left">Цена: <span class="pull-right">'.($value['price']==0 ? 'По запросу' : $value['price']).'</span></p>
                         </div>
                     ';
@@ -220,11 +222,11 @@ AppAsset::register($this);
                 <div class="row">
                     <div class="col-md-12">
                         <ul class="footer_menu">
-                            <li><a href="#">Главная</a></li>
-                            <li><a href="#">Запчасти</a></li>
-                            <li><a href="#">Аккумуляторы АКБ</a> </li>
-                            <li><a href="#">Шины</a></li>
-                            <li><a href="#">Контакты</a></li>
+                            <li><a href="/">Главная</a></li>
+                            <li><a href="/catalog/zapchasti">Запчасти</a></li>
+                            <li><a href="/catalog/akb">Аккумуляторы АКБ</a> </li>
+                            <li><a href="/catalog/shiny">Шины</a></li>
+                            <li><a href="/contacts">Контакты</a></li>
                         </ul>
                         <p class="text-center">&copy2015 AZIMUT LTD</p>
                     </div>

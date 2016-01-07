@@ -59,10 +59,14 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
+        @session_start();
+        $_SESSION['current_str'] = 'index';
         return $this->render('index');
     }
 
     public function actionCatalog($item){
+        @session_start();
+        $_SESSION['current_str'] = 'catalog';
         $url = parse_url(Yii::$app->request->url);
         $url  = explode('/',$url['path']);
 
@@ -128,12 +132,57 @@ class SiteController extends Controller
             'kroshka'=>$kroshka
         ]);
         else {
-            $tovars = Products::find()
-                ->where(['cat_id'=>$result->id])
+            $cat = ModArendaTree::findOne(['url'=>$item]);
+            $char_for_cats = CharacteristicsForCats::find()
+                ->select(['characteristics_for_cats.*','characteristics.name AS char_name'])
+                ->where(['cat_id'=>$cat->id])
+                ->leftJoin('characteristics','characteristics.id=characteristics_for_cats.character_id')
+                ->orderBy(['character_id'=>SORT_DESC])
+                ->asArray()
                 ->all();
-            return $this->render('tovars',['data'=>$tovars,
-                'kroshka'=>$kroshka
-            ]);
+            if (empty($char_for_cats)){
+                while ($cat->parent_id!=0){
+                    $char_for_cats = CharacteristicsForCats::find()
+                        ->select(['characteristics_for_cats.*','characteristics.name AS char_name'])
+                        ->where(['cat_id'=>$cat->parent_id])
+                        ->leftJoin('characteristics','characteristics.id=characteristics_for_cats.character_id')
+                        ->orderBy(['character_id'=>SORT_DESC])
+                        ->asArray()
+                        ->all();
+                    $cat = ModArendaTree::findOne(['id'=>$cat->parent_id]);
+                }
+            }
+            if ($char_for_cats){
+                //тут будет код если все охуенно
+            }
+            if (isset($_GET['view']) && $_GET['view']==2){
+                $tovars = Products::find()
+                    ->where(['cat_id'=>$result->id])
+                    ->asArray()
+                    ->all();
+                foreach ($tovars as $key => $value) {
+                    $chars = CharacteristicsProducts::find()
+                        ->where(['product_id'=>$value['id']])
+                        ->orderBy(['character_id'=>SORT_DESC])
+                        ->asArray()
+                        ->all();
+                    $tovars[$key]['chars'] = $chars;
+               }
+                return $this->render('tovars',[
+                    'data'=>$tovars,
+                    'kroshka'=>$kroshka,
+                    'chars'=>$char_for_cats
+                ]);
+            }else{
+                $tovars = Products::find()
+                    ->where(['cat_id'=>$result->id])
+                    ->all();
+                return $this->render('tovars',['data'=>$tovars,
+                    'kroshka'=>$kroshka
+                ]);
+            }
+
+
         }
     }
     public function actionLogin()

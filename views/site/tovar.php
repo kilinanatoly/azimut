@@ -34,6 +34,22 @@ $this->params['breadcrumbs'][] = $kroshka['tovars'][0]->name;
                 echo '<h2>'.$data['name'].'</h2>';
             ?>
             <div class="row row1">
+                <div class="rasp">
+                    <p class="text-right">
+                        <!-- Web2PDF Converter Button BEGIN -->
+                        <script type="text/javascript">
+                            var
+                                pdfbuttonstyle="custimg"
+                            custimg="http://cs404331.vk.me/u337396711/docs/97aa29301362/pdf.jpg?extra=dXcKlCZB0a90Z1K4AMyl7LyulHJmQTIax_ooiWCnEVEa7mSzU75v6fYLeqG8lYGnMKZJJ_0XqE4vZdMR8ly1j5ugAQnP"
+                        </script>
+                        <script src="http://www.web2pdfconvert.com/pdfbutton2.js" id="Web2PDF" type="text/javascript"></script>
+                        <!-- Web2PDF Converter Button END -->
+
+                        <a href='javascript:window.print(); void 0;' title="Распечатать страницу"> <img src="/img/pechat.png" / ></a>
+
+                    </p>
+                </div>
+
                 <div class="col-md-4">
                     <img class="img-responsive" src="<?=(empty($data->image) ? '/img/no_image_available.svg' : '/img/products/'.$data->image)  ?>" alt="<?= $data->name ?>">
                 </div>
@@ -76,8 +92,9 @@ $this->params['breadcrumbs'][] = $kroshka['tovars'][0]->name;
                     <p>Цена: <?=(empty($data->price) ? 'По запросу' : $data->price.' руб.')?></p>
                 </div>
                 <div class="col-md-8 tovar_buttons">
-                    <?=(empty($data->price) ? '<a href="#" data-toggle="modal" data-target="#zapros_price_modal" class="btn btn-default">Запросить стоимость</a>' : '<a href="#" data-toggle="modal" data-target="#buy_modal" class="btn btn-default">Купить</a>')?>
-                    <a href="#" class="btn btn-default" data-toggle="modal" data-target="#call_me_modal">Перезвоните мне</a>
+                    <a href="#" data-toggle="modal" data-target="#zapros_price_modal" class="btn btn-default">Запрос коммерческого <br> предложения</a>
+                    <a href="#" data-toggle="modal" data-target="#buy_modal" class="btn btn-default">Запросить <br>  счет на оплату</a>
+                    <a href="#" class="btn btn-default" data-toggle="modal" data-target="#call_me_modal">Запросить <br>договор поставки</a>
                 </div>
             </div>
             <div class="row">
@@ -110,7 +127,7 @@ $this->params['breadcrumbs'][] = $kroshka['tovars'][0]->name;
     </div>
 </div>
 
-<!--Модальное окно перезвоните мне-->
+<!--Модальное окно Запросить договор поставки-->
 <!-- Modal -->
 <div class="modal fade" id="call_me_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -134,6 +151,18 @@ $this->params['breadcrumbs'][] = $kroshka['tovars'][0]->name;
                         <label for="tel1">Телефон</label>
                         <input type="text" class="form-control" id="tel1" >
                     </div>
+                    <div class="form-group">
+                        <label for="inn1">ИНН</label>
+                        <input type="text" class="form-control" id="inn1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="gorod1">Город поставки товара</label>
+                        <input type="text" class="form-control" id="gorod1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="comment1">Комментарий</label>
+                        <input type="text" class="form-control" id="comment1" >
+                    </div>
                     <p class="error-text"></p>
                     <p class="success-text"></p>
                     <p class="text-right"><button type="submit" class="btn btn-default">Свяжитесь со мной</button></p>
@@ -143,7 +172,7 @@ $this->params['breadcrumbs'][] = $kroshka['tovars'][0]->name;
     </div>
 </div>
 
-<!--Модальное окно Запрос стоимости-->
+<!--Модальное окно Запрос коммерческого предложения-->
 <!-- Modal -->
 <div class="modal fade" id="zapros_price_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -199,6 +228,18 @@ $this->params['breadcrumbs'][] = $kroshka['tovars'][0]->name;
                     <div class="form-group">
                         <label for="tel2">Телефон</label>
                         <input type="text" class="form-control" id="tel2" >
+                    </div>
+                    <div class="form-group">
+                        <label for="inn2">ИНН</label>
+                        <input type="text" class="form-control" id="inn2" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="gorod2">Город поставки товара</label>
+                        <input type="text" class="form-control" id="gorod2" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="comment2">Комментарий</label>
+                        <input type="text" class="form-control" id="comment2" >
                     </div>
                     <p class="error-text"></p>
                     <p class="success-text"></p>

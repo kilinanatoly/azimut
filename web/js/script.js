@@ -23,7 +23,7 @@ $(document).ready(function(){
       }
     });
   }
-//отправка формы Перезвоните мне
+//отправка формы Запросить договор поставки
   $(".send_form2").submit(function(){
     if ($("#tel1").val()=='' && $("#email1").val()==''){
       $(".send_form2 .success-text").text("");
@@ -33,7 +33,7 @@ $(document).ready(function(){
 
       $.ajax({
         type: "GET",
-        url: "/site/add_call_me_message?name="+$("#name1").val()+"&email="+$("#email1").val()+"&tel="+$("#tel1").val()+"&product_id="+$("#product_id1").val(),
+        url: "/site/add_call_me_message?name="+$("#name1").val()+"&email="+$("#email1").val()+"&tel="+$("#tel1").val()+"&inn="+$("#inn1").val()+"&gorod="+$("#gorod1").val()+"&comment="+$("#comment1").val()+"&product_id="+$("#product_id1").val(),
         beforeSend: function(){
           $("#call_me_modal .btn-default").text('Подождите...').css('opacity','0.70');
         },
@@ -64,7 +64,7 @@ $(document).ready(function(){
 
       $.ajax({
         type: "GET",
-        url: "/site/add_buy_message?name="+$("#name2").val()+"&email="+$("#email2").val()+"&tel="+$("#tel2").val()+"&product_id="+$("#product_id2").val(),
+        url: "/site/add_buy_message?name="+$("#name2").val()+"&email="+$("#email2").val()+"&tel="+$("#tel2").val()+"&inn="+$("#inn2").val()+"&gorod="+$("#gorod2").val()+"&comment="+$("#comment2").val()+"&product_id="+$("#product_id2").val(),
         beforeSend: function(){
           $("#buy_modal .btn-default").text('Подождите...').css('opacity','0.70');
         },
@@ -86,7 +86,7 @@ $(document).ready(function(){
     return false;
   });
 
-  //отправка формы ЗАПРОС стоимости товара
+  //отправка формы Запрос коммерческого предложения
   $(".send_form4").submit(function(){
     if ($("#tel3").val()=='' && $("#email3").val()==''){
       $(".send_form4 .success-text").text("");
@@ -118,5 +118,5 @@ $(document).ready(function(){
     return false;
   });
 
-
+$("#syndicated-content a").attr('title','Распечатать страницу в PDF');
 });

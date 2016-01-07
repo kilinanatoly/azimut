@@ -32,6 +32,7 @@ foreach ($kroshka['cats'] as $key => $value) {
 $functions = new Functions();
 
 ?>
+
 <div class="container">
     <div class="row">
         <div class="col-md-9">
@@ -54,6 +55,7 @@ $functions = new Functions();
                 foreach ($chars as $key => $value) {
                     echo '<th>'.$value['char_name'].'</th>';
                 }
+                echo '<th>Стоимость</th>';
                 echo'
                     </tr>
                   </thead>
@@ -66,6 +68,7 @@ $functions = new Functions();
                     foreach ($value['chars'] as $key1 => $value1) {
                         echo '<td>'.($value1['value']=='none' ? 'Не указано' : $value1['value']).'</td>';
                     }
+                    echo ($value['price']==0 ? '<td><b>По запросу</b></td>' : '<td>'.$value['price'].'</td>');
                     echo '</tr>';
                 }
                     echo '

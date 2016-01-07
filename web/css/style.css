@@ -236,7 +236,7 @@ footer>.container-fluid{
 	border: 1px solid #F2BB7D;
 }
 .tovar header{
-	max-height:140px;
+	height:140px;
 	text-align: center;
 	margin-bottom:8px;
 	padding:7px;
@@ -361,4 +361,10 @@ margin:0;
 .vid{
 	margin-left:10px;
 	margin-bottom:20px;
+}
+.special header{
+	height:150px;
+}
+.special footer>p.title{
+	min-height: 70px;
 }

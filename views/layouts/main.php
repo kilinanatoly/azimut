@@ -129,10 +129,18 @@ AppAsset::register($this);
                 foreach ($specials as $key => $value) {
                     $url = $functions->get_tovar_url($value['id']);
                     echo '
-                       <div class="col-md-2">
-                            <a href="'.$url.'"><img class="img-responsive" src="/img/products/'.$value['image'].'" alt="'.$value['name'].'"></a>
-                            <p class="text-center"><a href="'.$url.'">'.$value['name'].'</a></p>
-                            <p class="text-left">Цена: <span class="pull-right">'.($value['price']==0 ? 'По запросу' : $value['price']).'</span></p>
+                       <div class="col-md-2 special">
+                            <header>
+                                <a href="'.$url.'">
+                                <img class="img-responsive" src="/img/products/'.$value['image'].'" alt="'.$value['name'].'">
+                                </a>
+                            </header>
+                            <footer>
+                                <p class="text-center title"><a href="'.$url.'">'.$value['name'].'</a></p>
+                                 <p class="text-left">Цена: <span class="pull-right">'.($value['price']==0 ? 'По запросу' : $value['price']).'</span></p>
+                            </footer>
+
+
                         </div>
                     ';
                 }

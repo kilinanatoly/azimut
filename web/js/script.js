@@ -119,4 +119,64 @@ $(document).ready(function(){
   });
 
 $("#syndicated-content a").attr('title','Распечатать страницу в PDF');
+
+  $(".add_comment_form").submit(function(){
+    $(".success-text").text('');
+    $.ajax({
+      type: "GET",
+      url: "/site/addcomment?name="+$("#commentName").val()+"&email="+$("#commentEmail").val()+"&comment="+$("#commentComment").val()+"&product_id="+$("#commentProductid").val(),
+      beforeSend: function(){
+        $(".add_comment_form .btn-default").text('Подождите...').css('opacity','0.70');
+      },
+      complete: function(){
+        $(".add_comment_form .btn-default").text('Отправить').css('opacity','1');
+      },
+      success: function(html){
+        if (html=='success'){
+          $(".add_comment_form .success-text").text("Спасибо за отзыв, он появится после модерации.");
+          $(':input','.add_comment_form')
+              .not(':button, :submit, :reset, :hidden')
+              .val('')
+              .removeAttr('checked')
+              .removeAttr('selected');
+        }
+      }
+    });
+    return false;
+  });
+
+  $(".call_me_main").submit(function(){
+    $(".success-text").text('');
+    $.ajax({
+      type: "GET",
+      url: "/site/callmemain?name="+$("#call_me_name").val()+"&tel="+$("#call_me_tel").val(),
+      beforeSend: function(){
+        $(".call_me_main .btn-default").text('Подождите...').css('opacity','0.70');
+      },
+      complete: function(){
+        $(".call_me_main .btn-default").text('Отправить').css('opacity','1');
+      },
+      success: function(html){
+        if (html=='success'){
+          $(".call_me_main .success-text").text("Спасибо за запрос, ожидайте звонка ");
+          $(':input','.call_me_main')
+              .not(':button, :submit, :reset, :hidden')
+              .val('')
+              .removeAttr('checked')
+              .removeAttr('selected');
+        }
+      }
+    });
+    return false;
+  });
+
+
+
+  $(".first_comment").click(function(){
+    $("#commentName").focus();
+    return false;
+  });
+
+
 });
+

@@ -40,7 +40,7 @@ $this->params['breadcrumbs'][] = $kroshka['tovars'][0]->name;
                         <script type="text/javascript">
                             var
                                 pdfbuttonstyle="custimg"
-                            custimg="http://cs404331.vk.me/u337396711/docs/97aa29301362/pdf.jpg?extra=dXcKlCZB0a90Z1K4AMyl7LyulHJmQTIax_ooiWCnEVEa7mSzU75v6fYLeqG8lYGnMKZJJ_0XqE4vZdMR8ly1j5ugAQnP"
+                            custimg="/img/pdf.jpg"
                         </script>
                         <script src="http://www.web2pdfconvert.com/pdfbutton2.js" id="Web2PDF" type="text/javascript"></script>
                         <!-- Web2PDF Converter Button END -->
@@ -97,29 +97,167 @@ $this->params['breadcrumbs'][] = $kroshka['tovars'][0]->name;
                     <a href="#" class="btn btn-default" data-toggle="modal" data-target="#call_me_modal">Запросить <br>договор поставки</a>
                 </div>
             </div>
+            <div class="margin5"></div>
             <div class="row">
                 <div class="col-md-12">
-                    <div class="panel panel-default description_panel">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Описание товара</h3>
+                    <ul class="nav nav-tabs nav-tabs2">
+                        <li class="active"><a href="#opisanie" data-toggle="tab">Описание</a></li>
+                        <li><a href="#otzyvy" data-toggle="tab">Отзывы</a></li>
+                        <li><a href="#pohozhie" data-toggle="tab">Похожие товары</a></li>
+                    </ul>
+
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div class="tab-pane fade in active" id="opisanie">
+                            <div class="panel panel-default description_panel">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Описание товара</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <?=$data->description?>
+                                </div>
+                            </div>
                         </div>
-                        <div class="panel-body">
-                            <?=$data->description?>
+                        <div class="tab-pane fade" id="otzyvy">
+                            <h2>Отзывы к товару <?=$data->name?></h2>
+                            <?php
+                            if (!$comments){
+                                echo '
+                                <div class="bs-callout bs-callout-info">
+                                    <h4>Комментариев нет:(</h4>
+                                    <p>Вы можете  <a class="first_comment" href="#">стать первым!</a></p>
+                                </div>
+                                ';
+                            }else{
+                                foreach ($comments as $key=>$value  ) {
+                                    echo '
+                                        <div class="media comments_media">
+                                                <img class="pull-left" src="/img/talk.png" alt="Автор">
+                                            <div class="media-body">
+                                                <h4 class="media-heading">'.$value['name'].'</h4>
+                                                <p> - '.$value['comment'].'</p>
+                                            </div>
+                                        </div>
+                                    ';
+
+                                }
+
+                            }
+                            ?>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="margin5"></div>
+                                    <h3>Добаавить отзыв</h3>
+                                    <form role="form" class="add_comment_form">
+                                        <input type="hidden" id="commentProductid" value="<?=$data->id?>">
+                                        <div class="form-group">
+                                            <label for="commentName">Имя</label>
+                                            <input type="text" class="form-control" id="commentName" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="commentEmail">Email</label>
+                                            <input type="email" class="form-control" id="commentEmail" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="commentComment">Сообщение</label>
+                                            <textarea class="form-control" id="commentComment" required></textarea>
+                                        </div>
+                                        <p class="success-text"></p>
+                                        <button type="submit" class="btn btn-default">Отправить</button>
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="tab-pane fade" id="pohozhie">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h2>Похожие товары</h2>
+                                </div>
+                                <?php
+                                if ($pohozhie){
+                                    $functions = new Functions();
+                                    foreach ($pohozhie as $key => $value) {
+                                        $url = $functions->get_tovar_url($value['id']);
+
+                                        echo '
+                                            <div class="col-md-3">
+                                            <a href="'.$url.'"><div class="tovar">
+                                                    <header>
+                                                        <img class="'.(empty($value['image']) ? 'noimage' : 'yesimage').'" src="'.(empty($value['image']) ? '/img/no_image_available.svg' : '/img/products/'.$value['image']).'">
+                                                    </header>
+                                                    <footer>
+                                                        <div class="product_title">
+                                                              <p>'.$value['name'].'</p>
+                                                        </div>
+                                                         <div class="product_price">
+                                                              <p><b>Цена:</b> <span class="pull-right">'.($value['price']==0 ? " По запросу" : $value['price'].' руб.').'</span></p>
+                                                         </div>
+                                                    </footer>
+                                                </div>
+                                                </a>
+
+                                            </div>
+                                            ';
+                                    }
+
+                                }
+                                ?>
+                            </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
         <div class="col-md-3">
-            <div class="panel panel-default">
+            <div class="panel panel-default panel3 ">
                 <div class="panel-heading">
-                    <h3 class="panel-title ">Новости</h3>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h3 class="panel-title ">Виды доставки</h3>
+                        </div>
+                        <div class="col-md-4">
+                            <img src="/img/logistics2.png" alt="Логистика" class="img-responsive pull-right">
+                        </div>
+                    </div>
                 </div>
                 <div class="panel-body">
-                    <?php
-                    $model = new \app\models\News();
-                    $model->news_list(5);
-                    ?>
+
+                    <div class="panel-group delivery-panel-group" id="accordion">
+                        <div class="panel panel-default">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                            Самовывоз Набережные Челны
+                                    </h4>
+                                </div>
+                            </a>
+
+                            <div id="collapseOne" class="panel-collapse collapse in">
+                                <div class="panel-body">
+                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                            Доставка по всей России
+                                    </h4>
+                                </div>
+                            </a>
+
+                            <div id="collapseTwo" class="panel-collapse collapse ">
+                                <div class="panel-body">
+                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
 
                 </div>
             </div>

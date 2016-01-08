@@ -43,6 +43,7 @@ $config = [
             'rules' => [
                 '/admin'=>'/tree/admin',
                 '/'=>'/site/index',
+                '/catalog'=>'/site/catalog',
                 '/catalog/<item:\S+>' => '/site/catalog',
 
                 //'<city:\D+>' => 'arenda/default/index',

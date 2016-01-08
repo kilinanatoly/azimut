@@ -3,8 +3,10 @@
 namespace app\controllers;
 
 use app\models\BuyMessages;
+use app\models\CallMeMain;
 use app\models\CallMeMessages;
 use app\models\CharacteristicsProducts;
+use app\models\Comments;
 use app\models\News;
 use app\models\Products;
 use app\models\ZaprosPriceMessages;
@@ -64,7 +66,7 @@ class SiteController extends Controller
         return $this->render('index');
     }
 
-    public function actionCatalog($item){
+    public function actionCatalog($item=''){
         @session_start();
         $_SESSION['current_str'] = 'catalog';
         $url = parse_url(Yii::$app->request->url);
@@ -103,12 +105,21 @@ class SiteController extends Controller
                     ->leftJoin('characteristics','characteristics_products.character_id=characteristics.id')
                     ->asArray()
                     ->all();
-
-                return $this->render('tovar',['data'=>$tovar,'characteristics'=>$characteristics,
-                'kroshka'=>$kroshka
+                $comments = Comments::find()->where(['product_id'=>$id])->andWhere(['moder'=>1])->asArray()->all();
+                $pohozhie = Products::find()
+                    ->where(['cat_id'=>$tovar->cat_id])
+                    ->andWhere('id<>'.$tovar->id)
+                    ->orderBy(['id'=>SORT_DESC])
+                    ->asArray()
+                    ->all();
+                return $this->render('tovar',['data'=>$tovar,
+                 'characteristics'=>$characteristics,
+                'kroshka'=>$kroshka,
+                'comments'=>$comments,
+                'pohozhie'=>$pohozhie
                 ]);
             }else{
-                return $this->redirect('notfound');
+                return $this->render('main_cats');
             }
         }
 
@@ -296,6 +307,28 @@ class SiteController extends Controller
             ->asArray()
             ->all();
         return $this->render('news',['data'=>$news]);
+    }
+
+    public function actionAddcomment($name,$email,$comment,$product_id){
+        $model = new Comments();
+        $model->name = $name;
+        $model->email = $email;
+        $model->comment = $comment;
+        $model->product_id = $product_id;
+        if ($model->save()){
+            return 'success';
+        }
+        return 'fail';
+    }
+
+    public function actionCallmemain($name,$tel){
+        $model = new CallMeMain();
+        $model->name = $name;
+        $model->tel = $tel;
+        if ($model->save()){
+            return 'success';
+        }
+        return 'fail';
     }
 
 }

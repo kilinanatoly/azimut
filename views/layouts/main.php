@@ -36,7 +36,10 @@ AppAsset::register($this);
                     <div class="container">
                         <div class="row">
                             <div class="col-lg-12">
-                                <img src="/img/azimut-logo.png" class="img-responsive" alt="Логотип">
+                                <img src="/img/azimut-logo.png" class="img-responsive pull-left" alt="Логотип">
+                                <a href="#" data-toggle="modal" data-target="#call-me" class="btn btn-default messageList pull-right call-me">Заказать звонок
+                                    <img src="/img/cellphone73.png" alt="телефон">
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -51,8 +54,10 @@ AppAsset::register($this);
                 <div id="navbarCollapse" class="collapse navbar-collapse navbar-right">
                     <ul class="nav nav-pills">
                         <li <?=($_SESSION['current_str']=='index' ? 'class="active"' : '')?>> <a href="/">Главная</a> </li>
+                        <li <?=($_SESSION['current_str']=='catalog' ? 'class="active"' : '')?>> <a href="/catalog">Каталог</a> </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Запчасти <b class="caret"></b></a>
+<!--                            <div class="messageList"><div>-->
                             <ul class="dropdown-menu">
                                 <?php
                                     $query = Yii::$app->db
@@ -231,6 +236,7 @@ AppAsset::register($this);
                     <div class="col-md-12">
                         <ul class="footer_menu">
                             <li><a href="/">Главная</a></li>
+                            <li><a href="/">Каталог</a></li>
                             <li><a href="/catalog/zapchasti">Запчасти</a></li>
                             <li><a href="/catalog/akb">Аккумуляторы АКБ</a> </li>
                             <li><a href="/catalog/shiny">Шины</a></li>
@@ -243,7 +249,34 @@ AppAsset::register($this);
         </div>
     </div>
 </footer>
+<!--Модальное окно Заказать звонок-->
+<!-- Modal -->
+<div class="modal fade" id="call-me" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title text-center" id="myModalLabel">Оставьте нам свой номер телефона и мы перезвоним Вам!</h4>
+            </div>
+            <div class="modal-body">
+                <form role="form" class="call_me_main">
+                    <div class="form-group">
+                        <label for="call_me_name">Имя</label>
+                        <input type="text" class="form-control" id="call_me_name" required>
+                    </div>
 
+                    <div class="form-group">
+                        <label for="call_me_tel">Телефон</label>
+                        <input type="text" class="form-control" id="call_me_tel" required >
+                    </div>
+                    <p class="error-text"></p>
+                    <p class="success-text"></p>
+                    <p class="text-right"><button type="submit" class="btn btn-default main-btn ">Позвоните мне!</button></p>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <?php $this->endBody() ?>

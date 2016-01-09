@@ -120,9 +120,11 @@ $functions = new Functions();
                             if ($value['chars']['type']=='string'){
                                 echo '
                             <div class="form-group">
-                                <select name="sel'.$value['character_id'].'" class="form-control">';
+                                <select name="sel'.$value['character_id'].'" class="form-control">
+                                <option  value="all">Все</option>';
+
                                 for ($i=0;$i<count($value['chars'])-1;$i++){
-                                    echo '<option value="'.$value['chars'][$i].'">'.$value['chars'][$i].'</option>';
+                                    echo '<option '.(isset($_POST['sel'.$value['character_id']]) ? ($value['chars'][$i]==$_POST['sel'.$value['character_id']] ? " selected " : "") : "").'value="'.$value['chars'][$i].'">'.$value['chars'][$i].'</option>';
                                 }
                                 echo '</select>
                             </div>
@@ -131,7 +133,7 @@ $functions = new Functions();
                             }
                         }
                         ?>
-                        <p class="text-center"><button type="submit"  class="btn btn-default main-btn">Подобрать</button></p>
+                        <p class="text-center"><button type="submit"  class="btn btn-default main-btn">Подобрать</button> <a href=""  class="btn btn-default main-btn">Сбросить</a></p>
                     <?php ActiveForm::end(); ?>
                 </div>
             </div>

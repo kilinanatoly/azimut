@@ -171,14 +171,33 @@ class SiteController extends Controller
                 //тут будет код если все охуенно
             }
             if (isset($_GET['view']) && $_GET['view']==2){
-                $tovars = Yii::$app->db->createCommand('
+                if (Yii::$app->request->post()){
+                    $post = Yii::$app->request->post();
+                    unset($post['_csrf']);
+                    $q='';
+                    foreach ($post as $key => $value) {
+                        if ($value=='all') continue;
+                        $chid  = substr($key, 3);    // возвращает "bcdef"
+                        $q.='INNER JOIN characteristics_products AS '.$key.' ON ('.$key.'.product_id=P.id AND ('.$key.'.character_id='.$chid.' AND '.$key.'.value="'.$value.'"))';
+                    }
+                    $tovars = Yii::$app->db->createCommand('
                     SELECT P.*
                     FROM products AS P
-                    INNER JOIN characteristics_products AS CP ON (CP.product_id=P.id AND (CP.character_id=7 AND CP.value="10мм"))
+                    '.$q.'
+                     WHERE cat_id='.$result->id.'
+
+                    ')
+                        ->queryAll();
+                }else{
+                    $tovars = Yii::$app->db->createCommand('
+                    SELECT P.*
+                    FROM products AS P
                     WHERE cat_id='.$result->id.'
 
                     ')
-                    ->queryAll();
+                        ->queryAll();
+                }
+
                 foreach ($tovars as $key => $value) {
                     $chars = CharacteristicsProducts::find()
                         ->where(['product_id'=>$value['id']])
@@ -186,10 +205,29 @@ class SiteController extends Controller
                         ->asArray()
                         ->all();
                     $tovars[$key]['chars'] = $chars;
-               }
-               //делаем проверку на типы фильтров
+                }
+
+                //ЗАПРО ДЛЯ ФИЛЬТРА
+                $tovars1 = Yii::$app->db->createCommand('
+                    SELECT P.*
+                    FROM products AS P
+                    WHERE cat_id='.$result->id.'
+
+                    ')
+                    ->queryAll();
+                foreach ($tovars1 as $key => $value) {
+                    $chars = CharacteristicsProducts::find()
+                        ->where(['product_id'=>$value['id']])
+                        ->orderBy(['character_id'=>SORT_ASC])
+                        ->asArray()
+                        ->all();
+                    $tovars1[$key]['chars'] = $chars;
+                }
+                //ЗАПРО ДЛЯ ФИЛЬТРА
+
+                //делаем проверку на типы фильтров
                 $CHARACTERISTICS=[];
-                foreach ($tovars as $key => $value) {
+                foreach ($tovars1 as $key => $value) {
                     foreach ($value['chars'] as $key1 => $value1) {
                         if (isset($CHARACTERISTICS[$key1])){
                             if (!in_array(strtolower($value1['value']),$CHARACTERISTICS[$key1]) && $value1['value']!='none'){

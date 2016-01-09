@@ -29,9 +29,10 @@ class BuyMessages extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [[ 'product_id'], 'required'],
-            [[ 'product_id'], 'integer'],
-            [['name', 'email', 'tel'], 'string', 'max' => 255]
+            [['name','product_id'], 'required'],
+            [['name', 'tel', 'email','inn','city'], 'string', 'max' => 255],
+            [['comment'], 'string'],
+            [['product_id'], 'integer']
         ];
     }
 

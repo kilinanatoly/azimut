@@ -178,5 +178,22 @@ $("#syndicated-content a").attr('title','Распечатать страницу
   });
 
 
+  $("#city").change(function(){
+    if ($(this).val()=="0"){
+      $('.header_tel').text('+7(960)085-41-39');
+    }else{
+      $.ajax({
+        type: "GET",
+        url: "/site/get_tel?cityid="+$(this).val(),
+        success: function(html){
+          if (html!='fail'){
+            $('.header_tel').text(html);
+          }
+        }
+      });
+    }
+  });
+
+
 });
 

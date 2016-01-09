@@ -272,7 +272,7 @@ $this->params['breadcrumbs'][] = $kroshka['tovars'][0]->name;
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel">У вас остались вопросы по товару <?=$data->name?> ? Оставьте свои данные и мы свяжемся с Вами</h4>
+                <h4 class="modal-title" id="myModalLabel">Запросить договор поставки на товар <?=$data->name?> . Оставьте свои данные и мы свяжемся с Вами</h4>
             </div>
             <div class="modal-body">
                 <form role="form" class="send_form2">
@@ -303,7 +303,7 @@ $this->params['breadcrumbs'][] = $kroshka['tovars'][0]->name;
                     </div>
                     <p class="error-text"></p>
                     <p class="success-text"></p>
-                    <p class="text-right"><button type="submit" class="btn btn-default">Свяжитесь со мной</button></p>
+                    <p class="text-right"><button type="submit" class="btn btn-default">Запросить</button></p>
                 </form>
             </div>
         </div>
@@ -317,7 +317,7 @@ $this->params['breadcrumbs'][] = $kroshka['tovars'][0]->name;
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel">Запрос стоимости товара <?=$data->name?>. Оставьте свои данные и мы свяжемся с Вами</h4>
+                <h4 class="modal-title" id="myModalLabel">Запрос коммерческого предложения на товар <?=$data->name?>. Оставьте свои данные и мы свяжемся с Вами</h4>
             </div>
             <div class="modal-body">
                 <form role="form" class="send_form4">

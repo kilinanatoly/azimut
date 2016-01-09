@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\CharacteristicsProducts;
+use app\models\EmailTo;
 use app\modules\regions\models\ModArendaRegions;
 use app\modules\Tree\models\ModArendaTree;
 use Yii;
@@ -90,6 +91,20 @@ class ProductsController extends Controller
         ]);
     }
 
+    public function actionEmailto()
+    {
+        $res = EmailTo::findOne(['id'=>1]);
+        if ($res->load(Yii::$app->request->post())) {
+            if ($res->validate()) {
+                $res->save();
+            }
+        }
+
+        return $this->render('/site/emailto', [
+            'model' => $res,
+        ]);
+    }
+
     public function actionCreate($parent_id)
     {
         @session_start();
@@ -147,10 +162,15 @@ class ProductsController extends Controller
                 if ($model->save()){
                     $last_id = $_GET['id'];
                     foreach (Yii::$app->request->post('character') as $key => $value) {
-                            $model1 =  CharacteristicsProducts::findOne(['product_id'=>$last_id,'character_id'=>$key]);
-                            $model1->character_id = $key;
-                            $model1->value = empty($value) ? 'none' : $value;
-                            $model1->save();
+                        $model1 =  CharacteristicsProducts::findOne(['product_id'=>$last_id,'character_id'=>$key]);
+                        if (!$model1) {
+                            $model1 = new CharacteristicsProducts();
+                            $model1->product_id = $last_id;
+
+                        }
+                        $model1->character_id = $key;
+                        $model1->value = empty($value) ? 'none' : $value;
+                        $model1->save();
                     }
                 }
                 // form inputs are valid, do something here

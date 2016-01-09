@@ -1,3 +1,4 @@
+
 <?php
 
 /* @var $this \yii\web\View */
@@ -36,10 +37,38 @@ AppAsset::register($this);
                     <div class="container">
                         <div class="row">
                             <div class="col-lg-12">
-                                <img src="/img/azimut-logo.png" class="img-responsive pull-left" alt="Логотип">
-                                <a href="#" data-toggle="modal" data-target="#call-me" class="btn btn-default messageList pull-right call-me">Заказать звонок
-                                    <img src="/img/cellphone73.png" alt="телефон">
-                                </a>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <img src="/img/azimut-logo.png" class="img-responsive pull-left" alt="Логотип">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <?php
+                                        $city = \app\models\GeobaseCity::find()
+                                        ->orderBy(['name'=>SORT_DESC])
+                                        ->asArray()
+                                        ->all();
+                                        ?>
+                                        <div class="form-group city-form-group">
+                                            <select name="city" id="city" class="form-control">
+                                                <option value="" disabled >Выберите город</option>
+                                                <option value="0" selected>Москва</option>
+                                                <?php
+                                                foreach ($city as $key => $value) {
+                                                        echo '<option value="'.$value['id'].'">'.$value['name'].'</option>';
+                                                    }
+
+                                                ?>
+                                            </select>
+                                        </div>
+                                        <p class="header_tel ">+7(960)085-41-39</p>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <a href="#" data-toggle="modal" data-target="#call-me" class="btn btn-default messageList pull-right call-me">Заказать звонок
+                                            <img src="/img/cellphone73.png" alt="телефон">
+                                        </a>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>

@@ -2,6 +2,8 @@
 
 /* @var $this yii\web\View */
 use app\modules\regions\models\Functions;
+use yii\widgets\ActiveForm;
+
 $url = parse_url(Yii::$app->request->url);
 $url  = explode('/',$url['path']);
 $this->title = 'My Yii Application';
@@ -108,14 +110,29 @@ $functions = new Functions();
         <div class="col-md-3">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title ">Новости</h3>
+                    <h3 class="panel-title ">Фильтр</h3>
                 </div>
                 <div class="panel-body">
-                <?php
-                $model = new \app\models\News();
-                $model->news_list(5);
-                ?>
-
+                    <?php $form = ActiveForm::begin(); ?>
+                        <?php
+                        foreach ($chars as $key => $value) {
+                            echo '<p>'.$value['char_name'].'</p>';
+                            if ($value['chars']['type']=='string'){
+                                echo '
+                            <div class="form-group">
+                                <select name="sel'.$value['character_id'].'" class="form-control">';
+                                for ($i=0;$i<count($value['chars'])-1;$i++){
+                                    echo '<option value="'.$value['chars'][$i].'">'.$value['chars'][$i].'</option>';
+                                }
+                                echo '</select>
+                            </div>
+                        ';
+                            }elseif ($value['chars']['type']=='number'){
+                            }
+                        }
+                        ?>
+                        <p class="text-center"><button type="submit"  class="btn btn-default main-btn">Подобрать</button></p>
+                    <?php ActiveForm::end(); ?>
                 </div>
             </div>
         </div>

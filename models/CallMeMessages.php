@@ -29,7 +29,8 @@ class CallMeMessages extends \yii\db\ActiveRecord
     {
         return [
             [['name','product_id'], 'required'],
-            [['name', 'tel', 'email'], 'string', 'max' => 255],
+            [['name', 'tel', 'email','inn','city'], 'string', 'max' => 255],
+            [['comment'], 'string'],
             [['product_id'], 'integer']
         ];
     }

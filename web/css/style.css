@@ -15,13 +15,7 @@ font-size:16px;
 a{
 	text-decoration: none !important;
 }
-button:focus{
-	text-decoration: none !important;
-	background-color:inherit !important;
-}
-button:hover{
-	background-color:inherit !important;
-}
+
 .navbar-inverse{
 	background-color:white;
 	min-height:100px;
@@ -291,11 +285,12 @@ margin:0;
 .tovar_buttons{
 	text-align: center;
 }
-.tovar_buttons>.btn{
+.tovar_buttons>.btn,.tovar_buttons>.btn:focus,.tovar_buttons>.btn:active{
 	border-radius: 0;
 	font-weight: bolder;
 	border:2px solid #FFD400;
 	transition:all 0.3s ease;
+	background-color:transparent !important;
 
 }
 .tovar_buttons>.btn:active{
@@ -499,4 +494,22 @@ margin:0;
 }
 .panel3 .panel-heading h3.panel-title{
 	line-height: 35px;
+}
+#city,#city:focus,#city:active{
+	border-radius:0;
+	border:1px solid black;
+	color:black;
+	box-shadow: none !important;
+	outline: none !important;
+}
+.city-form-group{
+	margin-bottom:5px;
+	border:none !important;
+	outline: none !important;
+
+}
+.header_tel{
+	font-weight: bold;
+	font-size:20px;
+	text-align: right;
 }

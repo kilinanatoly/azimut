@@ -7,10 +7,12 @@ use app\models\CallMeMain;
 use app\models\CallMeMessages;
 use app\models\CharacteristicsProducts;
 use app\models\Comments;
+use app\models\GeobaseCity;
 use app\models\News;
 use app\models\Products;
 use app\models\ZaprosPriceMessages;
 use app\modules\arenda\models\Characteristics;
+use app\modules\regions\models\Functions;
 use app\modules\regions\models\ModArendaRegions;
 use app\modules\Tree\models\CharacteristicsForCats;
 use app\modules\Tree\models\ModArendaTree;
@@ -20,6 +22,7 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\models\EmailTo;
 
 class SiteController extends Controller
 {
@@ -148,7 +151,7 @@ class SiteController extends Controller
                 ->select(['characteristics_for_cats.*','characteristics.name AS char_name'])
                 ->where(['cat_id'=>$cat->id])
                 ->leftJoin('characteristics','characteristics.id=characteristics_for_cats.character_id')
-                ->orderBy(['character_id'=>SORT_DESC])
+                ->orderBy(['character_id'=>SORT_ASC])
                 ->asArray()
                 ->all();
             if (empty($char_for_cats)){
@@ -157,28 +160,64 @@ class SiteController extends Controller
                         ->select(['characteristics_for_cats.*','characteristics.name AS char_name'])
                         ->where(['cat_id'=>$cat->parent_id])
                         ->leftJoin('characteristics','characteristics.id=characteristics_for_cats.character_id')
-                        ->orderBy(['character_id'=>SORT_DESC])
+                        ->orderBy(['character_id'=>SORT_ASC])
                         ->asArray()
                         ->all();
                     $cat = ModArendaTree::findOne(['id'=>$cat->parent_id]);
                 }
             }
             if ($char_for_cats){
+
                 //тут будет код если все охуенно
             }
             if (isset($_GET['view']) && $_GET['view']==2){
-                $tovars = Products::find()
-                    ->where(['cat_id'=>$result->id])
-                    ->asArray()
-                    ->all();
+                $tovars = Yii::$app->db->createCommand('
+                    SELECT P.*
+                    FROM products AS P
+                    INNER JOIN characteristics_products AS CP ON (CP.product_id=P.id AND (CP.character_id=7 AND CP.value="10мм"))
+                    WHERE cat_id='.$result->id.'
+
+                    ')
+                    ->queryAll();
                 foreach ($tovars as $key => $value) {
                     $chars = CharacteristicsProducts::find()
                         ->where(['product_id'=>$value['id']])
-                        ->orderBy(['character_id'=>SORT_DESC])
+                        ->orderBy(['character_id'=>SORT_ASC])
                         ->asArray()
                         ->all();
                     $tovars[$key]['chars'] = $chars;
                }
+               //делаем проверку на типы фильтров
+                $CHARACTERISTICS=[];
+                foreach ($tovars as $key => $value) {
+                    foreach ($value['chars'] as $key1 => $value1) {
+                        if (isset($CHARACTERISTICS[$key1])){
+                            if (!in_array(strtolower($value1['value']),$CHARACTERISTICS[$key1]) && $value1['value']!='none'){
+                                $CHARACTERISTICS[$key1][] = mb_strtolower($value1['value']);
+                            }
+                        }else{
+                            if ($value1['value']!='none'){
+                                $CHARACTERISTICS[$key1][] = (is_numeric($value1['value']) ? $value1['value'] : mb_strtolower($value1['value']));
+                            }
+                        }
+                        if (!isset($CHARACTER[$key1])) $CHARACTER[$key1] = 'number';
+                       if(!is_numeric($value1['value'])){
+                           $CHARACTER[$key1] = 'string';
+                       }
+                    }
+
+                }
+                foreach ($CHARACTERISTICS as $key3 => $value3) {
+                    $CHARACTERISTICS[$key3]['type'] = $CHARACTER[$key3];
+                }
+                foreach ($char_for_cats as $key3 => $value3) {
+                    if (!isset($CHARACTERISTICS[$key3])) {
+                        unset($char_for_cats[$key3]);
+                    }else{
+                        $char_for_cats[$key3]['chars'] = $CHARACTERISTICS[$key3];
+                    }
+                }
+
                 return $this->render('tovars',[
                     'data'=>$tovars,
                     'kroshka'=>$kroshka,
@@ -258,40 +297,123 @@ class SiteController extends Controller
             return 'empty';
         }
     }
-    //ПЕРЕЗВОНИТЕ МНЕ
-    public function actionAdd_call_me_message($name,$email,$tel,$product_id){
+    //ДОГОВОР ПОСТАВКИ
+    public function actionAdd_call_me_message($name,$email,$tel,$product_id,$inn,$gorod,$comment){
+        $mail = EmailTo::findOne(['id'=>1]);
+        $functions = new Functions();
+        $tovar = Products::findOne(['id'=>$product_id]);
         $model = new CallMeMessages();
         $model->name = $name;
         $model->email = empty($email) ? '' : $email;
         $model->tel = $tel;
         $model->product_id = $product_id;
+        $model->inn = $inn;
+        $model->city = $gorod;
+        $model->comment = $comment;
         if ($model->save()){
+            $to  = $mail->email_to;
+            $subject = "Новый запрос договора поставки";
+            $message = '
+                <html>
+                    <head>
+                        <title>Поступила новая заявка на запрос договора поставки!</title>
+                    </head>
+                    <body>
+                        <p>Только что поступила новая заявка на запрос договора поставки!</p>
+                        <p>Имя:'.$name.'</p>
+                        <p>Телефон:'.(empty($tel) ? 'не указано' : $tel).'</p>
+                        <p>Email:'.(empty($email) ? 'не указано' : $email).'</p>
+                        <p>ИНН:'.(empty($inn) ? 'не указано' : $inn).'</p>
+                        <p>Город:'.(empty($gorod) ? 'не указано' : $gorod).'</p>
+                        <p>Комментарий:'.(empty($comment) ? 'не указано' : $comment).'</p>
+                        <p>Товар:<a href="'.$functions->get_tovar_url($product_id).'">'.$tovar->name.'</a></p>
+                    </body>
+                </html>';
+
+            $headers  = "Content-type: text/html; charset=windows-utf-8 \r\n";
+            $headers .= "From: TEST\r\n";
+            $headers .= "Bcc:TEST1\r\n";
+            mail($to, $subject, $message, $headers);
             return 'success';
         }
         return false;
     }
 
     //ЗАПРОС СЧЕТ НА ОПЛАТУ
-    public function actionAdd_buy_message($name,$email,$tel,$product_id){
+    public function actionAdd_buy_message($name,$email,$tel,$product_id,$inn,$gorod,$comment){
+        $mail = EmailTo::findOne(['id'=>1]);
+        $functions = new Functions();
+        $tovar = Products::findOne(['id'=>$product_id]);
         $model = new BuyMessages();
         $model->name = $name;
         $model->email = empty($email) ? '' : $email;
         $model->tel = empty($tel) ? '' : $tel;;
         $model->product_id = $product_id;
+        $model->inn = $inn;
+        $model->city = $gorod;
+        $model->comment = $comment;
         if ($model->save()){
+            $to  = $mail->email_to;
+            $subject = "Новый запрос счета на оплату";
+            $message = '
+                <html>
+                    <head>
+                        <title>Поступила новая заявка на запрос счета на оплату!</title>
+                    </head>
+                    <body>
+                        <p>Только что поступила новая заявка на запрос счета на оплату!</p>
+                        <p>Имя:'.$name.'</p>
+                        <p>Телефон:'.(empty($tel) ? 'не указано' : $tel).'</p>
+                        <p>Email:'.(empty($email) ? 'не указано' : $email).'</p>
+                        <p>ИНН:'.(empty($inn) ? 'не указано' : $inn).'</p>
+                        <p>Город:'.(empty($gorod) ? 'не указано' : $gorod).'</p>
+                        <p>Комментарий:'.(empty($comment) ? 'не указано' : $comment).'</p>
+                        <p>Товар:<a href="'.$functions->get_tovar_url($product_id).'">'.$tovar->name.'</a></p>
+                    </body>
+                </html>';
+
+            $headers  = "Content-type: text/html; charset=windows-utf-8 \r\n";
+            $headers .= "From: TEST\r\n";
+            $headers .= "Bcc:TEST1\r\n";
+            mail($to, $subject, $message, $headers);
             return 'success';
         }
         return false;
     }
 
-    //ЗАПРОС СТОИМОСТИ ТОВАРА
+    //ЗАПРОС КОММЕРЧЕСКОГО ПРЕДЛОЖЕНИЯ
     public function actionAdd_price_zapros_message($name,$email,$tel,$product_id){
+        $mail = EmailTo::findOne(['id'=>1]);
+        $functions = new Functions();
+        $tovar = Products::findOne(['id'=>$product_id]);
         $model = new ZaprosPriceMessages();
         $model->name = $name;
         $model->email = empty($email) ? '' : $email;
         $model->tel = empty($tel) ? '' : $tel;;
         $model->product_id = $product_id;
         if ($model->save()){
+
+            $to  = $mail->email_to;
+            $subject = "Запрос на запрос коммерческого предложения";
+            $message = '
+                <html>
+                    <head>
+                        <title>Поступила новая заявка на запрос коммерческого предложения</title>
+                    </head>
+                    <body>
+                        <p>Только что поступила новая заявка на запрос коммерческого предложения!</p>
+                        <p>Имя:'.$name.'</p>
+                        <p>Телефон:'.(empty($tel) ? 'не указано' : $tel).'</p>
+                        <p>Email:'.(empty($email) ? 'не указано' : $email).'</p>
+                        <p>Товар:<a href="'.$functions->get_tovar_url($product_id).'">'.$tovar->name.'</a></p>
+                    </body>
+                </html>';
+
+            $headers  = "Content-type: text/html; charset=windows-utf-8 \r\n";
+            $headers .= "From: TEST\r\n";
+            $headers .= "Bcc:TEST1\r\n";
+            mail($to, $subject, $message, $headers);
+
             return 'success';
         }
         return false;
@@ -322,13 +444,42 @@ class SiteController extends Controller
     }
 
     public function actionCallmemain($name,$tel){
+        $email = EmailTo::findOne(['id'=>1]);
         $model = new CallMeMain();
         $model->name = $name;
         $model->tel = $tel;
         if ($model->save()){
+                $to  = $email->email_to ;
+                $subject = "Запрос на звонок";
+                $message = '
+                <html>
+                    <head>
+                        <title>Поступила новая заявка запроса на звонок</title>
+                    </head>
+                    <body>
+                        <p>Только что поступила новая заявка запроса на звонок!</p>
+                        <p>Имя'.$name.'</p>
+                        <p>Телефон:'.$tel.'</p>
+                    </body>
+                </html>';
+
+                $headers  = "Content-type: text/html; charset=windows-utf-8 \r\n";
+                $headers .= "From: TEST\r\n";
+                $headers .= "Bcc:TEST1\r\n";
+                mail($to, $subject, $message, $headers);
             return 'success';
         }
         return 'fail';
     }
+
+    public function actionGet_tel($cityid){
+        $model = new GeobaseCity();
+        if ($res = $model->findOne(['id'=>$cityid])){
+            return $res->tel;
+        }else   return 'fail';
+
+
+    }
+
 
 }

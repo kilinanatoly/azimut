@@ -42,6 +42,7 @@ $config = [
             'enablePrettyUrl' => true,
             'rules' => [
                 '/admin'=>'/tree/admin',
+                '/emailto'=>'/products/emailto',
                 '/'=>'/site/index',
                 '/catalog'=>'/site/catalog',
                 '/catalog/<item:\S+>' => '/site/catalog',

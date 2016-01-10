@@ -11,9 +11,9 @@ TreeAsset::register($this);
 $this->params['breadcrumbs'][] = ['label' => 'Категории', 'url' => ['index']];
 $this->title = (!empty($parent) ? 'Добавление подкатегории в категорию '.$parent->name : 'Добавить категорию');
     $this->params['breadcrumbs'][] = $this->title;
-if (!empty(Yii::$app->session->get('cat')))
+if (!empty(Yii::$app->session->get('catt')))
 {
-    $cat =Yii::$app->session->get('cat');
+    $cat =Yii::$app->session->get('catt');
     echo '
         <div class="alert alert-success">Добавлена новая категория: '.$cat.'</div>
         ';

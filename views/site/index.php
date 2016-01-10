@@ -2,7 +2,7 @@
 
 /* @var $this yii\web\View */
 
-$this->title = 'My Yii Application';
+$this->title = 'Азимут LTD | Главная';
 ?>
 <div class="container">
     <div class="row">
@@ -10,7 +10,7 @@ $this->title = 'My Yii Application';
             <div class="row">
                 <div class="col-md-12">
                     <div class="your-class">
-                        <div><p class="text_slider">asd</p><img class="img-responsive" src="/img/1.jpg" alt=""></div>
+                        <div><img class="img-responsive" src="/img/1.jpg" alt=""></div>
                         <div><img class="img-responsive" src="/img/3.jpg" alt=""></div>
                         <div><img class="img-responsive" src="/img/2.jpg" alt=""></div>
                     </div>
@@ -30,16 +30,16 @@ $this->title = 'My Yii Application';
                     <h2>Каталоги продукции</h2>
                     <hr>
                     <div class="row index-catalog">
-                        <div class="col-md-4">
-                            <h3 class="text-center"><a href="/catalog/zapchasti">Запчасти</a></h3>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                            <h3 class="text-center h31"><a href="/catalog/zapchasti">Запчасти</a></h3>
                             <a href="/catalog/zapchasti"><img class="img-responsive" src="/img/gear.png" alt="Запчасти"></a>
                         </div>
-                        <div class="col-md-4">
-                            <h3 class="text-center"><a href="/catalog/akb">Аккумуляторы АКБ</a></h3>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                            <h3 class="text-center h31"><a href="/catalog/akb">Аккумуляторы АКБ</a></h3>
                             <a href="/catalog/akb"><img class="img-responsive battery-img" src="/img/batteries.png" alt="АКБ"></a>
                         </div>
-                        <div class="col-md-4">
-                            <h3 class="text-center"><a href="/catalog/shiny">Шины</a></h3>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                            <h3 class="text-center h31"><a href="/catalog/shiny">Шины</a></h3>
                             <a href="/catalog/shiny"><img class="img-responsive" src="/img/tire.png" alt="Шины"></a>
                         </div>
                     </div>
@@ -50,7 +50,7 @@ $this->title = 'My Yii Application';
 
         </div>
         <div class="col-md-3">
-            <div class="panel panel-default">
+            <div class="panel panel-default news-panel">
                 <div class="panel-heading">
                     <h3 class="panel-title ">Новости</h3>
                 </div>

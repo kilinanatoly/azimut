@@ -43,10 +43,10 @@ class Comments extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
+            'name' => 'Имя',
             'email' => 'Email',
-            'comment' => 'Comment',
-            'product_id' => 'Product ID',
+            'comment' => 'Комментарий',
+            'product_id' => 'Id Продукта',
         ];
     }
 }

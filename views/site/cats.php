@@ -2,10 +2,10 @@
 
 /* @var $this yii\web\View */
 
-$this->title = 'My Yii Application';
+
 $url = parse_url(Yii::$app->request->url);
 $url  = explode('/',$url['path']);
-$this->title = 'My Yii Application';
+$this->title =$kroshka['cats'][count($kroshka['cats'])-1]->name.' | Азимут LTD';
 $link='/catalog';
 foreach ($kroshka['cats'] as $key => $value) {
     if ($key!=count($kroshka['cats'])-1){
@@ -59,7 +59,7 @@ foreach ($kroshka['cats'] as $key => $value) {
     </div>
     </div>
     <div class="col-md-3">
-        <div class="panel panel-default">
+        <div class="panel panel-default news-panel">
             <div class="panel-heading">
                 <h3 class="panel-title ">Новости</h3>
             </div>

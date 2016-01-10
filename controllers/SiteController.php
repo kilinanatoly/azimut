@@ -170,15 +170,22 @@ class SiteController extends Controller
 
                 //тут будет код если все охуенно
             }
-            if (isset($_GET['view']) && $_GET['view']==2){
+
                 if (Yii::$app->request->post()){
                     $post = Yii::$app->request->post();
                     unset($post['_csrf']);
                     $q='';
                     foreach ($post as $key => $value) {
                         if ($value=='all') continue;
-                        $chid  = substr($key, 3);    // возвращает "bcdef"
-                        $q.='INNER JOIN characteristics_products AS '.$key.' ON ('.$key.'.product_id=P.id AND ('.$key.'.character_id='.$chid.' AND '.$key.'.value="'.$value.'"))';
+                        if (is_array($value)){
+                            if ((empty($value[0]) || empty($value[1]))) continue;
+                            $chid  = substr($key, 3);    // возвращает "bcdef"
+                            $q.='INNER JOIN characteristics_products AS '.$key.' ON ('.$key.'.product_id=P.id AND ('.$key.'.character_id='.$chid.' AND ('.$key.'.value>='.$value[0].' AND '.$key.'.value<='.$value[1].' )))';
+                        }else{
+                            $chid  = substr($key, 3);    // возвращает "bcdef"
+                            $q.='INNER JOIN characteristics_products AS '.$key.' ON ('.$key.'.product_id=P.id AND ('.$key.'.character_id='.$chid.' AND '.$key.'.value="'.$value.'"))';
+                        }
+
                     }
                     $tovars = Yii::$app->db->createCommand('
                     SELECT P.*
@@ -261,14 +268,7 @@ class SiteController extends Controller
                     'kroshka'=>$kroshka,
                     'chars'=>$char_for_cats
                 ]);
-            }else{
-                $tovars = Products::find()
-                    ->where(['cat_id'=>$result->id])
-                    ->all();
-                return $this->render('tovars',['data'=>$tovars,
-                    'kroshka'=>$kroshka
-                ]);
-            }
+
 
 
         }

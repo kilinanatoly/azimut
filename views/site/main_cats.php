@@ -24,8 +24,8 @@ $this->params['breadcrumbs'][]='Каталог';
         </div>
     </div>
     <div class="col-md-3">
-        <div class="panel panel-default">
-            <div class="panel-heading">
+        <div class="panel panel-default news-panel">
+            <div class="panel-heading ">
                 <h3 class="panel-title ">Новости</h3>
             </div>
             <div class="panel-body">

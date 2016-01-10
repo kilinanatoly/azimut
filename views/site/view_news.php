@@ -7,6 +7,7 @@ $this->params['breadcrumbs'][] = [
     'label'=>'Новости'
 ];
 $this->params['breadcrumbs'][] = $data->name;
+$this->title = $data->name." | Новости"
 ?>
 <div class="container">
     <div class="row">

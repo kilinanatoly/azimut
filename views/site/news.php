@@ -4,6 +4,7 @@
 use app\modules\regions\models\Functions;
 
 $this->params['breadcrumbs'][] = 'Новости';
+$this->title = "Список новостей";
 ?>
 <div class="container">
     <div class="row">

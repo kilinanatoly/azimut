@@ -21,6 +21,7 @@ class AppAsset extends AssetBundle
         'css/slick.css',
         'css/style.css',
         'css/site.css',
+        'css/media.css',
         'css/slick-theme.css',
     ];
     public $js = [

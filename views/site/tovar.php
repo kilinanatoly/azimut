@@ -4,7 +4,7 @@
 use app\modules\regions\models\Functions;
 $url = parse_url(Yii::$app->request->url);
 $url  = explode('/',$url['path']);
-$this->title = 'My Yii Application';
+$this->title =$data->name.' | Азимут LTD';
 $link='/catalog';
 foreach ($kroshka['cats'] as $key => $value) {
     foreach ($url as $key1 => $value1) {
@@ -25,11 +25,10 @@ foreach ($kroshka['cats'] as $key => $value) {
     $link='/catalog';
 }
 $this->params['breadcrumbs'][] = $kroshka['tovars'][0]->name;
-
 ?>
 <div class="container">
     <div class="row">
-        <div class="col-md-9 view_tovar">
+        <div class="col-md-9 col-sm-9 col-xs-12 view_tovar">
             <?php
                 echo '<h2>'.$data['name'].'</h2>';
             ?>
@@ -50,10 +49,10 @@ $this->params['breadcrumbs'][] = $kroshka['tovars'][0]->name;
                     </p>
                 </div>
 
-                <div class="col-md-4">
+                <div class="col-md-4 col-sm-4 col-xs-12">
                     <img class="img-responsive" src="<?=(empty($data->image) ? '/img/no_image_available.svg' : '/img/products/'.$data->image)  ?>" alt="<?= $data->name ?>">
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-8 col-sm-8 col-xs-12">
                     <h3>Технические характеристики:</h3>
 
                     <table class="table table-striped table-bordered">
@@ -168,7 +167,7 @@ $this->params['breadcrumbs'][] = $kroshka['tovars'][0]->name;
                                     </form>
                                 </div>
                             </div>
-
+                            <div class="margin5"></div>
                         </div>
                         <div class="tab-pane fade" id="pohozhie">
                             <div class="row">
@@ -182,7 +181,7 @@ $this->params['breadcrumbs'][] = $kroshka['tovars'][0]->name;
                                         $url = $functions->get_tovar_url($value['id']);
 
                                         echo '
-                                            <div class="col-md-3">
+                                            <div class="col-md-3 col-sm-4 col-xs-6">
                                             <a href="'.$url.'"><div class="tovar">
                                                     <header>
                                                         <img class="'.(empty($value['image']) ? 'noimage' : 'yesimage').'" src="'.(empty($value['image']) ? '/img/no_image_available.svg' : '/img/products/'.$value['image']).'">
@@ -211,15 +210,15 @@ $this->params['breadcrumbs'][] = $kroshka['tovars'][0]->name;
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 col-sm-3 col-xs-12">
             <div class="panel panel-default panel3 ">
                 <div class="panel-heading">
                     <div class="row">
-                        <div class="col-md-8">
+                        <div class="col-md-9 col-sm-12 col-xs-8">
                             <h3 class="panel-title ">Виды доставки</h3>
                         </div>
-                        <div class="col-md-4">
-                            <img src="/img/logistics2.png" alt="Логистика" class="img-responsive pull-right">
+                        <div class="col-md-3 hidden-sm col-xs-4">
+                            <img src="/img/logistics2.png" alt="Логистика" class="img-responsive pull-right logistic_img">
                         </div>
                     </div>
                 </div>

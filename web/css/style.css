@@ -132,7 +132,6 @@ color:black !important;
 
 }
 .contacts{
-	min-height: 600px;
 	border-left: 1px solid #eee;
 }
 .contacts img{
@@ -156,9 +155,10 @@ color:black !important;
 .hr_no_margin{
 	margin:0;
 }
-.send_form1 a.btn-default,.add_comment_form  .btn-default{
+.send_form1 a.btn-default,.send_form1 a.btn-default:hover,.send_form1 a.btn-default:focus,.send_form1 a.btn-default:active,.add_comment_form  .btn-default{
 		border-radius: 0;
 	border:1px solid  #428bca;
+	background-color:transparent; !important;
 }
 footer>.container-fluid{
 	background-color:#428bca;
@@ -240,6 +240,7 @@ footer>.container-fluid{
 }
 .tovar header>img{
 	width:100%;
+	max-height: 100%;
 }
 .noimage{
 	width: 75% !important;
@@ -494,6 +495,7 @@ margin:0;
 }
 .panel3 .panel-heading h3.panel-title{
 	line-height: 35px;
+	font-size:17px;
 }
 #city,#city:focus,#city:active{
 	border-radius:0;
@@ -512,4 +514,12 @@ margin:0;
 	font-weight: bold;
 	font-size:20px;
 	text-align: right;
+}
+.filter-panel input,.filter-panel select{
+	border-radius:0;
+	border:1px solid black;
+	color:black;
+}
+.filter-panel {
+	color:black;
 }

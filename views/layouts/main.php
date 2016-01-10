@@ -38,10 +38,10 @@ AppAsset::register($this);
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
                                         <img src="/img/azimut-logo.png" class="img-responsive pull-left" alt="Логотип">
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-3 col-sm-3 col-xs-12">
                                         <?php
                                         $city = \app\models\GeobaseCity::find()
                                         ->orderBy(['name'=>SORT_DESC])
@@ -62,9 +62,9 @@ AppAsset::register($this);
                                         </div>
                                         <p class="header_tel ">+7(960)085-41-39</p>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-3 col-sm-3 col-xs-12">
                                         <a href="#" data-toggle="modal" data-target="#call-me" class="btn btn-default messageList pull-right call-me">Заказать звонок
-                                            <img src="/img/cellphone73.png" alt="телефон">
+                                            <img src="/img/cellphone73.png" alt="телефон" class="hidden-sm  ">
                                         </a>
                                     </div>
                                 </div>
@@ -144,8 +144,8 @@ AppAsset::register($this);
         'homeLink'=>['label'=>'Главная','url'=>'/   ']
     ]) ?>
     <?=$content?>
-    <div class="margin8"></div>
-    <div class="container-fluid special-buy-container">
+    <div class="margin8 hidden-xs"></div>
+    <div class="container-fluid special-buy-container hidden-xs">
         <div class="row">
             <h2 class="text-center">Успей купить!</h2>
         </div>
@@ -163,7 +163,7 @@ AppAsset::register($this);
                 foreach ($specials as $key => $value) {
                     $url = $functions->get_tovar_url($value['id']);
                     echo '
-                       <div class="col-md-2 special">
+                       <div class="col-md-2 col-sm-4  hidden-xs special">
                             <header>
                                 <a href="'.$url.'">
                                 <img class="img-responsive" src="/img/products/'.$value['image'].'" alt="'.$value['name'].'">
@@ -185,10 +185,10 @@ AppAsset::register($this);
         </div>
     </div>
 
-    <hr>
+    <hr class="hr_no_margin">
     <div class="container">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-6 col-sm-6 col-xs-12">
                 <h2>Напишите нам</h2>
                 <div class="line"></div>
                 <form role="form" class="send_form1">
@@ -210,12 +210,12 @@ AppAsset::register($this);
                 </form>
 
             </div>
-            <div class="col-md-6 contacts">
+            <div class="col-md-6 col-sm-6 col-xs-12 contacts">
                 <h2>Наши контакты</h2>
                 <div class="line"></div>
                 <div class="row">
-                    <div class="col-md-1"><img class="img-responsive" src="/img/phone.png" alt="Телефон"></div>
-                    <div class="col-md-11">
+                    <div class="col-md-2 col-sm-2 col-xs-2"><img class="img-responsive" src="/img/phone.png" alt="Телефон"></div>
+                    <div class="col-md-10 col-sm-10 col-xs-10">
                         <p><b>Телефон:</b></p>
                         <p><a href="#">8(960)-085-41-39</a></p>
                     </div>
@@ -223,16 +223,16 @@ AppAsset::register($this);
                     <div class="clearfix"></div>
                     <div class="margin3"></div>
 
-                    <div class="col-md-1"><img class="img-responsive" src="/img/email.png" alt="Email"></div>
-                    <div class="col-md-11">
+                    <div class="col-md-2 col-sm-2 col-xs-2"><img class="img-responsive" src="/img/email.png" alt="Email"></div>
+                    <div class="col-md-10 col-sm-10 col-xs-10">
                         <p><b>EMAIL:</b></p>
                         <p><a href="#">azimut@ya.ru</a></p>
                     </div>
                     <div class="clearfix"></div>
                     <div class="margin3"></div>
 
-                    <div class="col-md-1"><img class="img-responsive" src="/img/home.png" alt="Адрес"></div>
-                    <div class="col-md-11">
+                    <div class="col-md-2 col-sm-2 col-xs-2"><img class="img-responsive" src="/img/home.png" alt="Адрес"></div>
+                    <div class="col-md-10 col-sm-10 col-xs-10">
                         <p><b>Адрес:</b></p>
                         <p>1 автодорога, орловское кольцо</p>
                     </div>
@@ -240,8 +240,8 @@ AppAsset::register($this);
                     <div class="clearfix"></div>
                     <div class="margin3"></div>
 
-                    <div class="col-md-1"><img class="img-responsive" src="/img/twitter.png" alt="twitter"></div>
-                    <div class="col-md-11">
+                    <div class="col-md-2 col-sm-2 col-xs-2"><img class="img-responsive" src="/img/twitter.png" alt="twitter"></div>
+                    <div class="col-md-10 col-sm-10 col-xs-10">
                         <p><b>Twitter:</b></p>
                         <p><a href="#">Azimut</a></p>
                     </div>
@@ -252,11 +252,12 @@ AppAsset::register($this);
             </div>
         </div>
     </div>
+    <div class="margin5"></div>
+
     <hr class="hr_no_margin">
 
-
 </div>
-
+<div class="margin5"></div>
 <footer>
     <div class="container-fluid">
         <div class="row ">
@@ -265,13 +266,12 @@ AppAsset::register($this);
                     <div class="col-md-12">
                         <ul class="footer_menu">
                             <li><a href="/">Главная</a></li>
-                            <li><a href="/">Каталог</a></li>
+                            <li><a href="/catalog">Каталог</a></li>
                             <li><a href="/catalog/zapchasti">Запчасти</a></li>
                             <li><a href="/catalog/akb">Аккумуляторы АКБ</a> </li>
                             <li><a href="/catalog/shiny">Шины</a></li>
                             <li><a href="/contacts">Контакты</a></li>
                         </ul>
-                        <p class="text-center">&copy2015 AZIMUT LTD</p>
                     </div>
                 </div>
             </div>

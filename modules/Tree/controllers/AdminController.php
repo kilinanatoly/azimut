@@ -92,7 +92,7 @@ class AdminController extends Controller
                 if ($model->save()) {
                     $session = new Session;
                     $session->open();
-                    Yii::$app->session->set('cat',$model->name);
+                    Yii::$app->session->set('catt',$model->name);
                     return $this->redirect('create?id='.$id);
                 }
             }

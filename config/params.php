@@ -67,7 +67,13 @@ return [
                 'id'=>12,
                 'name'=>'Получатели сообщений',
                 'url'=>'/emailto'
+            ],
+            'comments'=>[
+                'id'=>13,
+                'name'=>'Комментарии',
+                'url'=>'/comments'
             ]
+
 
 
         ]
